@@ -19,3 +19,30 @@ class User(AbstractUser):
     def __str__(self):
         return str(self.username)
     
+
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    cover_images = models.ImageField(upload_to='Images_Profile', null=True, blank=True, default='user.png')
+    phone = models.CharField(max_length=200, null=True ,blank=True)
+    address = models.CharField(max_length=200 ,null=True ,blank=True)
+    verified = models.BooleanField(default=False)
+
+    
+    def __str__(self):
+        return self.user.username if self.user and self.user.username else 'Unnamed Profile'
+    
+@receiver(post_save, sender=User)
+# create user profile automatic
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+        
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+
+post_save.connect(create_user_profile ,sender=User)
+post_save.connect(save_user_profile ,sender=User)
