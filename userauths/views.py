@@ -128,3 +128,10 @@ class UserListAPIView(ListAPIView):
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = [AllowAny]
+
+
+class ProfileListAPIView(ListAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+    
