@@ -93,3 +93,18 @@ class ProfileView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Profile, user=self.request.user)
+    
+
+
+# @login_required
+class ProfileUpdateView(UpdateView):
+    model = Profile
+    form_class = ProfileForm
+    template_name = 'userauths/profile_update.html'
+    context_object_name = 'profile'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user=self.request.user)
+
+    def get_success_url(self):
+        return reverse_lazy('userauths:profile')
