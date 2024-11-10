@@ -9,4 +9,5 @@ urlpatterns = [
     path('debug/', queryset_debug, name='queryset_debug'),  # Debugging tool for testing queryset performance.
     path('<slug:slug>/', ProductDetails.as_view(), name='product_detail'),
     path('brands/<slug:slug>/', BrandDetails.as_view(), name='brand_detail'),
+
 ]

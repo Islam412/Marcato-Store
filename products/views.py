@@ -62,3 +62,5 @@ class BrandDetails(ListView):
         context["brand"] = brand  
 
         return context 
+    
+    

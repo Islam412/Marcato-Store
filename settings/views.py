@@ -18,3 +18,8 @@ def home(request):
         'new_products': new_products,
         'review': review
     }) 
+
+
+
+def contact(request):
+    return render(request, 'settings/contact.html')
