@@ -93,7 +93,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # Custom context processors off company data from settings app(company_contexet_processor.py)
-                'settings.company_contexet_processor.get_company_data',
+                # 'settings.company_contexet_processor.get_company_data',
             ],
         },
     },
@@ -170,11 +170,45 @@ LOGIN_URL = 'userauths:sign-up'
 LOGOUT_REDIRECT_URL = "userauths:sign-up"
 
 
+
+
+# api
+# Filter api setting
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+
+# JWT Authintication settings
+from datetime import timedelta # import this library top of the settings.py file
+
+# put on your settings.py file below INSTALLED_APPS
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.AllowAny',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME': timedelta(days=30),
+    'SLIDING_TOKEN_REFRESH_LIFETIME_LATE_USER': timedelta(days=1),
+    'SLIDING_TOKEN_LIFETIME_LATE_USER': timedelta(days=30),
+}
+
+
+
+
 # JAZZMIN settings
 JAZZMIN_SETTINGS = {
     'site_header': "Marcato store",
     'site_brand': "Connecting people together...",
-    'site_logo': "assets/images/Marcato store.png",
+    'site_logo': "assets/images/Marcato-store.png",
     'copyright':  "All Right Reserved 2024",
     "welcome_sign": "Welcome to Marcato store Admin, Login Now.",
     "topmenu_links": [
