@@ -12,7 +12,7 @@
             <div class="container">
                 <h2>contact us</h2>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Contact</li>
                 </ol>
             </div>
@@ -32,7 +32,7 @@
                         <div class="contact-card">
                             <i class="icofont-location-pin"></i>
                             <h4>head office</h4>
-                            <p>1Hd- 50, 010 Avenue, NY 90001 United States</p>
+                            <p>{{ company_data.address }}</p>
                         </div>
                     </div>
                     <div class="col-md-6 col-lg-4">
@@ -40,8 +40,7 @@
                             <i class="icofont-phone"></i>
                             <h4>phone number</h4>
                             <p>
-                                <a href="#">009-215-5596 <span>(toll free)</span></a>
-                                <a href="#">009-215-5595</a>
+                                <a href="https://wa.me/{{ company_data.phones }}">{{ company_data.phones }}</a>
                             </p>
                         </div>
                     </div>
@@ -50,8 +49,7 @@
                             <i class="icofont-email"></i>
                             <h4>Support mail</h4>
                             <p>
-                                <a href="#">contact@example.com</a>
-                                <a href="#">info@example.com</a>
+                                <a href="https://mail.google.com/mail/{{ company_data.email }}">{{ company_data.email }}</a>
                             </p>
                         </div>
                     </div>
