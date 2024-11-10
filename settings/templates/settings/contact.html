@@ -31,7 +31,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="contact-card">
                             <i class="icofont-location-pin"></i>
-                            <h4>head office</h4>
+                            <a href="https://www.google.com/maps?q={{ company_data.address }}"><h4>head office</h4></a>
                             <p>
                                 <a href="https://www.google.com/maps?q={{ company_data.address }}">{{ company_data.address }}</a>
                             </p>
@@ -40,7 +40,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="contact-card active">
                             <i class="icofont-phone"></i>
-                            <h4>phone number</h4>
+                            <a href="https://wa.me/{{ company_data.phones }}""><h4>phone number</h4></a>
                             <p>
                                 <a href="https://wa.me/{{ company_data.phones }}">{{ company_data.phones }}</a>
                             </p>
@@ -49,7 +49,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="contact-card">
                             <i class="icofont-email"></i>
-                            <h4>Support mail</h4>
+                            <a href="mailto:{{ company_data.email }}"><h4>Support mail</h4></a>
                             <p>
                                 <a href="mailto:{{ company_data.email }}">{{ company_data.email }}</a>
                             </p>
