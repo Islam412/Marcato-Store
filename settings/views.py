@@ -23,3 +23,7 @@ def home(request):
 
 def contact(request):
     return render(request, 'settings/contact.html')
+
+
+def need_help(request):
+    return render(request, 'settings/need_help.html')
