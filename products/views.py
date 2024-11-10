@@ -20,3 +20,9 @@ def queryset_debug(request):
     data = Product.objects.annotate(price_with_tax=F('price')*1.2) # add new tower
     
     return render(request, 'products/queryset_debug.html', {'data': data})
+
+
+class ProductList(ListView):
+    model = Product
+    paginate_by = 30
+    
