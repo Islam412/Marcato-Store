@@ -105,7 +105,12 @@
             <div class="container">
                 <div class="header-content">
                     <div class="header-media-group">
-                        <button class="header-user"><img src="{% static 'images/user.png' %}" alt="user"></button>
+                        {% if user.is_authenticated %}
+                            <img class="header-user" src="{{ user.profile.cover_images.url }}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;"">
+                        {% else %}
+                            <img class="header-user" src="{% static 'images/user.png' %}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;">
+                        {% endif %}
+
                         <a href="index.html"><img src="{{ company_data.logo.url }}" alt="logo"></a>
                         <button class="header-src"><i class="fas fa-search"></i></button>
                     </div>
@@ -116,7 +121,12 @@
         
                     <div class="dropdown">
                         <button class="header-widget" title="My Account">
-                            <img src="{{ user.profile.cover_images.url }}" alt="user">
+                            {% if user.is_authenticated %}
+
+                                <img class="header-user" src="{{ user.profile.cover_images.url }}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;"">
+                            {% else %}
+                                <img class="header-user" src="{% static 'images/user.png' %}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;">
+                            {% endif %}
                         </button>
                         <ul class="dropdown-position-list navbar-link">
                             <li><a href="{% url 'userauths:profile' %}">Profile</a></li>
@@ -496,23 +506,18 @@
             </div>
             <div class="nav-content">
 
-                {% comment %} <div class="nav-btn btn dropdown">
-                    <a href="#" class="header-widget" title="My Account">
-                        <img src="{{ user.profile.cover_images.url }}" alt="user">
-                    </a>
-                    <ul class="dropdown-position-list navbar-link">
-                        <li><a href="{% url 'userauths:profile' %}">Profile</a></li>
-                        <li><a href="{% url 'userauths:profile-edit' %}">Edit Profile</a></li>
-                        <li><a href="{% url 'userauths:sign-out' %}">Log out</a></li>
-                    </ul>
-                </div> {% endcomment %}
 
 
 
 
                     <div class="nav-btn btn dropdown">
                         <button class="header-widget" title="My Account">
-                            <img src="{{ user.profile.cover_images.url }}" alt="user">
+                            {% if user.is_authenticated %}
+
+                                <img class="header-user" src="{{ user.profile.cover_images.url }}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;"">
+                            {% else %}
+                                <img class="header-user" src="{% static 'images/user.png' %}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;">
+                            {% endif %}
                         </button>
                         <ul class="dropdown-position-list navbar-link">
                             <li><a href="{% url 'userauths:profile' %}">Profile</a></li>
@@ -520,6 +525,11 @@
                             <li><a href="{% url 'userauths:sign-out' %}">Log out</a></li>
                         </ul>
                     </div>
+
+
+
+        
+
 
 
 
