@@ -156,7 +156,7 @@
                     
                     {% for product in sale_products %}
                         <div class="col">
-                            <div class="product-card">
+                            <div class="product-card {% if product.quantity == 0 %} product-disable {% endif %}">
                                 <div class="product-media">
                                     <div class="product-label">
                                         <label class="label-text sale">{{ product.flag }}</label>
@@ -231,7 +231,7 @@
                     
                     {% for product in featured_products %}
                         <div class="col">
-                            <div class="feature-card">
+                            <div class="feature-card {% if product.quantity == 0 %} product-disable {% endif %}">
                                 <div class="feature-media">
                                     <div class="feature-label">
                                         <label class="label-text feat">{{product.flag}}</label>
@@ -240,7 +240,7 @@
                                         <i class="fas fa-heart"></i>
                                     </button>
                                     <a class="feature-image" href="{% url 'products:product_detail' product.slug %}">
-                                        <img src="{{product.image.url}}" style="width: 178.86px; height: 177.46px;" alt="product">
+                                        <img src="{{product.image.url}}" style="width: 200px; height: 200px;" alt="product">
                                     </a>
                                 </div>
                                 <div class="feature-content">
@@ -309,7 +309,7 @@
                             
                             {% for items in new_products %}
                                 <li>
-                                    <div class="product-card">
+                                    <div class="product-card {% if product.quantity == 0 %} product-disable {% endif %}">
                                         <div class="product-media">
                                             <div class="product-label">
                                                 <label class="label-text new">{{items.flag}}</label>
