@@ -28,6 +28,7 @@ class ProductList(ListView):
     
 
 
+
 class ProductDetails(DetailView):
     model = Product
     
