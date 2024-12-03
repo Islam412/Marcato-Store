@@ -16,7 +16,7 @@
                         <i class="fas fa-heart"></i>
                     </button>
                     <a class="product-image" href="{% url 'products:product_detail' product.slug %}">
-                        <img src="{{ product.image.url }}" style="width: 178.86px; height: 177.46px;" alt="product">
+                        <img src="{{ product.image.url }}" style="width: 450px; height: 300px;" alt="product">
                     </a>
                 </div>
                 <div class="product-content">
@@ -50,8 +50,17 @@
     </div>
 
     {% if not product_list %}
-    <p>No products found for "{{ request.GET.q }}"</p>
-    {% endif %}
+    <div class="no-products-message text-center">
+        <i class="fas fa-search text-danger" style="font-size: 3rem;"></i>
+        <p class="mt-3" style="font-size: 1.25rem; color: #6c757d;">
+            No products found for "<strong>{{ request.GET.q }}</strong>"
+        </p>
+        <p class="suggestion" style="font-size: 1rem; color: #888;">
+            Try searching with different keywords or check your spelling.
+        </p>
+    </div>
+{% endif %}
+
 
     {% endblock boody %}
 
