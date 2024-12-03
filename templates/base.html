@@ -135,8 +135,8 @@
                         </ul>
                     </div>
         
-                    <form class="header-form" method="get" action="{% url 'products:product_list' %}">
-                        <input type="text" name="q" placeholder="Search anything...">
+                    <form class="header-form" method="get" action="{% url 'products:product_search' %}">
+                        <input type="text" name="q" placeholder="Search anything..." value="{{ request.GET.q }}">
                         <button type="submit"><i class="fas fa-search"></i></button>
                     </form>
         

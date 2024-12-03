@@ -8,7 +8,6 @@ from .models import Product, Brand, ProductImage, Review
 
 
 
-
 def queryset_debug(request):
     
     # data = Product.objects.all()
@@ -26,7 +25,7 @@ class ProductList(ListView):
     model = Product
     paginate_by = 30
     
-
+    
 
 
 class ProductDetails(DetailView):
@@ -64,4 +63,19 @@ class BrandDetails(ListView):
 
         return context 
     
+
+
+
+def product_search(request):
+    query = request.GET.get('q', '')
+    if query:
+        # Search products by name, description, or SKU
+        products = Product.objects.filter(
+            Q(name__icontains=query) | 
+            Q(descripition__icontains=query) | 
+            Q(sku__icontains=query)
+        )
+    else:
+        products = Product.objects.all()
     
+    return render(request, 'products/product_search.html', {'product_list': products})
