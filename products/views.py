@@ -65,7 +65,7 @@ class BrandDetails(ListView):
     
 
 
-
+# search and filter with category
 def product_search(request):
     query = request.GET.get('q', '')
     if query:
