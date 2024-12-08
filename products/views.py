@@ -24,8 +24,21 @@ def queryset_debug(request):
 class ProductList(ListView):
     model = Product
     paginate_by = 30
-    
-    
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        flag = self.request.GET.get('flag')
+        tag = self.request.GET.get('tag')
+
+        if flag:
+            queryset = queryset.filter(flag=flag)
+        
+        if tag:
+            queryset = queryset.filter(tags__name=tag)
+
+        return queryset
+
 
 
 class ProductDetails(DetailView):
@@ -84,14 +97,11 @@ def product_search(request):
 def product_filter(request):
     min_price = request.GET.get('min_price')
     max_price = request.GET.get('max_price')
-    rating = request.GET.getlist('rating')
 
     products = Product.objects.all()
     if min_price:
         products = products.filter(price__gte=float(min_price))
     if max_price:
         products = products.filter(price__lte=float(max_price))
-    if rating:
-        products = products.filter(review_product__rate__in=rating).distinct()
     
     return render(request, 'products/product_filter.html', {'products': products})
