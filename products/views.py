@@ -99,4 +99,4 @@ def product_filter_by_tags(request):
     if tags:
         products = products.filter(flag__in=tags)
 
-    return render(request, 'products/product_filter_by_tag.html', {'products': products})
+    return render(request, 'products/product_filter.html', {'products': products})
