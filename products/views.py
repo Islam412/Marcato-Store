@@ -92,7 +92,7 @@ def product_filter(request):
     return render(request, 'products/product_filter.html', {'products': products})
 
 
-def product_filter_by_tags(request):
+def product_filter_by_flag(request):
     tags = request.GET.getlist('tags')
     products = Product.objects.all()
 
