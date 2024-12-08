@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import ListView , DetailView
-from django.db.models import Q , F , Value
+from django.db.models import Q , F , Value , Count
 from django.db.models.aggregates import Max,Min,Count,Avg,Sum
 
 
@@ -92,24 +92,12 @@ def product_filter(request):
     return render(request, 'products/product_filter.html', {'products': products})
 
 
-# def product_filter_by_flag(request):
-#     tags = request.GET.getlist('tags')
-#     products = Product.objects.all()
-
-#     if tags:
-#         products = products.filter(flag__in=tags)
-
-#     return render(request, 'products/product_filter.html', {'products': products})
-
-
 def product_filter_by_flag(request):
     tags = request.GET.getlist('tags')
-    brands = request.GET.getlist('brands')
     products = Product.objects.all()
 
     if tags:
         products = products.filter(flag__in=tags)
-    if brands:
-        products = products.filter(brand__id__in=brands)
 
-    return render(request, 'products/product_filter.html', {'products': products, 'brands': Brand.objects.all()})
+    return render(request, 'products/product_filter.html', {'products': products})
+
