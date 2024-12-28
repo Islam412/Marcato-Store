@@ -16,5 +16,5 @@ urlpatterns = [
 
     #api
     path('api/list', product_list_api, name='product_api_list'),
-    path('api/list/<int:product_name>', product_detail_api, name='product_detail_api'),
+    path('api/list/<int:product_name>', product_detail_api , name='product_detail_api'),
 ]
