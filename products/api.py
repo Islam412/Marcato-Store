@@ -24,7 +24,13 @@ def product_detail_api(request,product_name):
 
 
 # class generic view api
-class ProductListAPI(generics.ListCreateAPIView):
+class ProductListAPI(generics.ListAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializers
+    permission_classes = [AllowAny]
+
+
+class ProductDetailAPI(generics.RetrieveAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializers
     permission_classes = [AllowAny]
