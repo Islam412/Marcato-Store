@@ -10,6 +10,7 @@ class ProductSerializers(serializers.ModelSerializer):
 
 
 class BrandSerializers(serializers.ModelSerializer):
+    products = ProductSerializers(source='product_name', many=True)
     class Meta:
         model = Brand
         fields = '__all__'
