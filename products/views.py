@@ -70,9 +70,10 @@ def product_search(request):
         # Search products by name, description, or SKU
         products = Product.objects.filter(
             Q(name__icontains=query) | 
-            Q(descripition__icontains=query) | 
-            Q(sku__icontains=query)
-        )
+            Q(descripition__icontains=query) |
+            Q(sku__icontains=query) |
+            Q(tags__name__icontains=query)
+        ).distinct()
     else:
         products = Product.objects.all()
     
