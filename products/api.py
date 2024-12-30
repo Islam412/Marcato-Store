@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
-from .serializers import ProductSerializers
-from .models import Product
+from .serializers import ProductSerializers , BrandSerializers
+from .models import Product , Brand
 
 
 # Functions api
@@ -33,4 +33,10 @@ class ProductListAPI(generics.ListCreateAPIView):  # list show all dsta | create
 class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView): 
     queryset = Product.objects.all()
     serializer_class = ProductSerializers
+    permission_classes = [AllowAny]
+
+
+class BrandListAPI(generics.ListCreateAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializers
     permission_classes = [AllowAny]
