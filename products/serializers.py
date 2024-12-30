@@ -5,7 +5,16 @@ from rest_framework import serializers
 from .models import Product , Brand
 
 
+
+class BrandListSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Brand
+        fields = '__all__'
+
+
 class ProductListSerializers(serializers.ModelSerializer):
+    brand = BrandListSerializers()  # Show all data off brand
+    brand = serializers.StringRelatedField()   # show name of brand this product
     avg_rate = serializers.SerializerMethodField()
     review_count = serializers.SerializerMethodField()
 
@@ -28,6 +37,7 @@ class ProductListSerializers(serializers.ModelSerializer):
 
 
 class ProductDetailSerializers(serializers.ModelSerializer):
+    brand = serializers.StringRelatedField()
     avg_rate = serializers.SerializerMethodField()
     review_count = serializers.SerializerMethodField()
 
@@ -46,10 +56,6 @@ class ProductDetailSerializers(serializers.ModelSerializer):
         return review
 
 
-class BrandListSerializers(serializers.ModelSerializer):
-    class Meta:
-        model = Brand
-        fields = '__all__'
 
 
 class BrandDetailSerializers(serializers.ModelSerializer):
