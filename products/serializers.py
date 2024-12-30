@@ -28,9 +28,22 @@ class ProductListSerializers(serializers.ModelSerializer):
 
 
 class ProductDetailSerializers(serializers.ModelSerializer):
+    avg_rate = serializers.SerializerMethodField()
+    review_count = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
         fields = '__all__'
+    
+    def get_avg_rate(self, product):
+        avg = product.review_product.aggregate(rate_avg=Avg('rate'))
+        if not avg['rate_avg']:
+            return 0
+        return avg['rate_avg']
+    
+    def get_review_count(self, product:Product):
+        review = product.review_product.all().count()
+        return review
 
 
 class BrandListSerializers(serializers.ModelSerializer):
