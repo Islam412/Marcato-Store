@@ -40,3 +40,9 @@ class BrandListAPI(generics.ListCreateAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandSerializers
     permission_classes = [AllowAny]
+
+
+class BrandDetailAPI(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Brand.objects.all()
+    serializer_class = BrandSerializers
+    permission_classes = [AllowAny]
