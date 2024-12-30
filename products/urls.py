@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import ProductDetails, ProductList, BrandList, BrandDetails, queryset_debug , product_search , product_filter , product_filter_by_flag
-from .api import product_list_api , product_detail_api , ProductListAPI , ProductDetailAPI
+from .api import product_list_api , product_detail_api , ProductListAPI , ProductDetailAPI , BrandListAPI , BrandDetailAPI
 
 app_name = 'products'
 
@@ -21,4 +21,6 @@ urlpatterns = [
     #Api genaric views
     path('api/genariclist', ProductListAPI.as_view()),
     path('api/genariclist/<int:pk>', ProductDetailAPI.as_view()),
+    path('api/brandlist', BrandListAPI.as_view()),
+    path('api/brandlist/<int:pk>', BrandDetailAPI.as_view()),
 ]
