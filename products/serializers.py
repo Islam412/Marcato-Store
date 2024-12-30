@@ -13,7 +13,7 @@ class BrandListSerializers(serializers.ModelSerializer):
 
 
 class ProductListSerializers(serializers.ModelSerializer):
-    brand = BrandListSerializers()  # Show all data off brand
+    # brand = BrandListSerializers()  # Show all data off brand
     brand = serializers.StringRelatedField()   # show name of brand this product
     avg_rate = serializers.SerializerMethodField()
     review_count = serializers.SerializerMethodField()
@@ -37,7 +37,7 @@ class ProductListSerializers(serializers.ModelSerializer):
 
 
 class ProductDetailSerializers(serializers.ModelSerializer):
-    brand = serializers.StringRelatedField()
+    brand = BrandListSerializers()
     avg_rate = serializers.SerializerMethodField()
     review_count = serializers.SerializerMethodField()
 
