@@ -29,6 +29,7 @@ urlpatterns = [
     path('user/',include('userauths.urls')),
     path('', include('settings.urls')),
     path('products/',include('products.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
