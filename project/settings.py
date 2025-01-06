@@ -178,7 +178,6 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-
 # JWT Authintication settings
 from datetime import timedelta # import this library top of the settings.py file
 
