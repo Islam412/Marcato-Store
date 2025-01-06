@@ -37,9 +37,10 @@ class CustomPagination(PageNumberPagination):
 class ProductListAPI(generics.ListCreateAPIView):  # list show all dsta | create update data
     queryset = Product.objects.all()
     serializer_class = ProductListSerializers
-    filter_backends = [DjangoFilterBackend,filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter,filters.OrderingFilter]
     filterset_fields = ['flag', 'brand']
     search_fields = ['name', 'descripition']
+    ordering_fields = ['price', 'quantity']
     pagination_class = CustomPagination
     permission_classes = [AllowAny]
 
