@@ -56,6 +56,10 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'dj_rest_auth',
     'rest_framework.authtoken',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
 ]
 
 MIDDLEWARE = [
@@ -64,12 +68,17 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 
+    # custom with auths
+    # 'allauth.account.auth_backends.AuthenticationBackend',
+
     # debug_toolbar library
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 
@@ -77,6 +86,13 @@ INTERNAL_IPS = [
     # ...
     "127.0.0.1",
     # ...
+]
+
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 
@@ -166,6 +182,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # change user Configs
 AUTH_USER_MODEL = 'userauths.User'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_REDIRECT_URL = ''
 LOGIN_URL = 'userauths:sign-up'
