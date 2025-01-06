@@ -8,6 +8,7 @@ from rest_framework import filters
 
 from .serializers import ProductListSerializers , ProductDetailSerializers , BrandListSerializers , BrandDetailSerializers
 from .models import Product , Brand
+from .myfilter import ProductFilter
 
 
 # Functions api
@@ -41,6 +42,7 @@ class ProductListAPI(generics.ListCreateAPIView):  # list show all dsta | create
     filterset_fields = ['flag', 'brand']
     search_fields = ['name', 'descripition']
     ordering_fields = ['price', 'quantity']
+    filterset_class = ProductFilter
     pagination_class = CustomPagination
     permission_classes = [AllowAny]
 
