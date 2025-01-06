@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.pagination import PageNumberPagination
 
 from .serializers import ProductListSerializers , ProductDetailSerializers , BrandListSerializers , BrandDetailSerializers
 from .models import Product , Brand
@@ -25,11 +26,19 @@ def product_detail_api(request,product_name):
 
 
 # class generic view api
+
+class CustomPagination(PageNumberPagination):
+    page_size = 5
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
 class ProductListAPI(generics.ListCreateAPIView):  # list show all dsta | create update data
     queryset = Product.objects.all()
     serializer_class = ProductListSerializers
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['flag', 'brand']
+    pagination_class = CustomPagination
     permission_classes = [AllowAny]
 
 
