@@ -51,6 +51,7 @@ class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView):
 class BrandListAPI(generics.ListCreateAPIView):
     queryset = Brand.objects.all()
     serializer_class = BrandListSerializers
+    pagination_class = CustomPagination
     permission_classes = [AllowAny]
 
 
