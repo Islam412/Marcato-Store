@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.pagination import PageNumberPagination
+from rest_framework import filters
 
 from .serializers import ProductListSerializers , ProductDetailSerializers , BrandListSerializers , BrandDetailSerializers
 from .models import Product , Brand
@@ -36,8 +37,9 @@ class CustomPagination(PageNumberPagination):
 class ProductListAPI(generics.ListCreateAPIView):  # list show all dsta | create update data
     queryset = Product.objects.all()
     serializer_class = ProductListSerializers
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter]
     filterset_fields = ['flag', 'brand']
+    search_fields = ['name', 'descripition']
     pagination_class = CustomPagination
     permission_classes = [AllowAny]
 
