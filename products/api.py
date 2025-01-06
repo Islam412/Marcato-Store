@@ -30,7 +30,7 @@ def product_detail_api(request,product_name):
 # class generic view api
 
 class CustomPagination(PageNumberPagination):
-    page_size = 5
+    page_size = 10
     page_size_query_param = 'page_size'
     max_page_size = 100
 
@@ -45,7 +45,6 @@ class ProductListAPI(generics.ListCreateAPIView):  # list show all dsta | create
     filterset_class = ProductFilter
     pagination_class = CustomPagination
     permission_classes = [AllowAny]
-
 
 class ProductDetailAPI(generics.RetrieveUpdateDestroyAPIView): 
     queryset = Product.objects.all()
