@@ -1,8 +1,13 @@
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+
 
 from userauths.models import User
 from products.models import Product
+from utils import generate_code
+
+import datetime
 # Create your models here.
 
 
@@ -13,14 +18,14 @@ CART_STATUS = [
 
 class Cart(models.Model):
     user = models.ForeignKey(User,related_name='cart_user', on_delete=models.SET_NULL, null=True, blank=True)
-    status = models.CharField(max_length=10,choices=CART_STATUS)
+    status = models.CharField(_('Status'),max_length=10,choices=CART_STATUS)
 
 
 class CartDetails(models.Model):
     cart = models.ForeignKey(Cart,related_name='cart_details', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='cart_product', on_delete=models.SET_NULL, null=True, blank=True)
-    quantity = models.IntegerField()
-    total = models.FloatField(null=True,blank=True)
+    quantity = models.IntegerField(_('Quantity'))
+    total = models.FloatField(_('Total'),null=True,blank=True)
 
 
 ORDER_STATUS = [
@@ -29,21 +34,36 @@ ORDER_STATUS = [
     ('Shipped','Shipped'),
     ('Delivered','Delivered'),
 ]
-
 class Order(models.Model):
     user = models.ForeignKey(User,related_name='order_user', on_delete=models.SET_NULL, null=True, blank=True)
-    status = models.CharField(max_length=10,choices=ORDER_STATUS)
-    code = models.CharField()
-    order_time = models.DateTimeField(default=timezone.now())
-    delivery_time = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(('Status'), max_length=10,choices=ORDER_STATUS)
+    code = models.CharField(_('Code'), max_length=20, default=generate_code)
+    order_time = models.DateTimeField(_('Order time'),default=timezone.now())
+    delivery_time = models.DateTimeField(_('Delivery time'),null=True, blank=True)
+    coupon = models.ForeignKey('Coupon',related_name='order_coupon', on_delete=models.SET_NULL, blank=True , null=True)
+    total_after_coupon = models.FloatField(_('Total after coupon'),null=True,blank=True)
 
 class OrderDetails(models.Model):
     order = models.ForeignKey(Order,related_name='order_details', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='order_product', on_delete=models.SET_NULL, null=True, blank=True)
-    price = models.FloatField()
-    quantity = models.IntegerField()
-    total = models.FloatField(null=True,blank=True)
+    price = models.FloatField(('Price'))
+    quantity = models.IntegerField(_('Quantity'))
+    total = models.FloatField(_('Total'), null=True,blank=True)
 
 
 class Coupon(models.Model):
-    code = models.CharField(max_length=20)
+    code = models.CharField(_('Code'), max_length=20)
+    image = models.ImageField(_('Image'),upload_to='coupon', blank=True, null=True)
+    quantity = models.IntegerField(_('Quantity')), 
+    start_date = models.DateField(_('Start Date'), default=timezone.now)
+    end_date = models.DateField(_('End Date'), null=True, blank=True)
+
+    def __str__(self):
+        return self.code
+    
+
+
+    def save(self, *args, **kwargs):
+       week = datetime.timedelta(days=7)
+       self.end_date = self.start_date + week
+       super(Coupon, self).save(*args, **kwargs)  # call the real save method
