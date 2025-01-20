@@ -183,7 +183,7 @@
                                 </li>
 
                                 <li class="navbar-item">
-                                    <a class="navbar-link" href="#">Orders</a>
+                                    <a class="navbar-link" href="{% url 'orders:order_list' %}">Order</a>
                                 </li>
                             </ul>
                             <div class="navbar-info-group">
@@ -470,7 +470,7 @@
                         <a class="nav-link" href="{% url 'products:brand_list' %}">brand</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{% url 'products:product_list' %}">Order</a>
+                        <a class="nav-link" href="{% url 'orders:order_list' %}">Order</a>
                     </li>
 
                     <li><a class="nav-link" href="offer.html"><i class="icofont-sale-discount"></i>offers</a></li>
@@ -754,7 +754,7 @@
                                     <li><a href="/">Home</a></li>
                                     <li><a href="{% url 'products:product_list' %}">Product</a></li>
                                     <li><a href="{% url 'products:brand_list' %}">Brand</a></li>
-                                    <li><a href="#">Order</a></li>
+                                    <li><a href="{% url 'orders:order_list' %}">Order</a></li>
                                 </ul>
                                 <ul>
                                     <li><a href="{% url 'userauths:profile' %}">My Account</a></li>
