@@ -5,4 +5,7 @@ from .models import Order
 
 # Create your views here.
 
+class OrderListView(ListView):
+    model = Order
+    ordering = ['-id']
 
