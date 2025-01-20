@@ -137,14 +137,16 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td class="table-serial"><h6>01</h6></td>
-                                                            <td class="table-image"><img src="{% static 'images/product/01.jpg' %}" alt="product"></td>
-                                                            <td class="table-name"><h6>product name</h6></td>
-                                                            <td class="table-price"><h6>$19<small>/kilo</small></h6></td>
-                                                            <td class="table-brand"><h6>Fresh Company</h6></td>
-                                                            <td class="table-quantity"><h6>3</h6></td>
-                                                        </tr>
+                                                        {% for item in object.order_details.all %}
+                                                            <tr>
+                                                                <td class="table-serial"><h6>01</h6></td>
+                                                                <td class="table-image"><img src="{{item.product.image.url}}" alt="product"></td>
+                                                                <td class="table-name"><h6>{{item.product}}</h6></td>
+                                                                <td class="table-price"><h6>${{item.price}}</td>
+                                                                <td class="table-brand"><h6>{{item.product.brand}}</h6></td>
+                                                                <td class="table-quantity"><h6>{{item.quantity}}</h6></td>
+                                                            </tr>
+                                                        {% endfor %}
                                                     </tbody>
                                                 </table>
                                             </div>
