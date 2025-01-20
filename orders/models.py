@@ -22,6 +22,13 @@ class Cart(models.Model):
 
     def __str__(self):
         return str(self.user)
+    
+    def cart_total(self):
+        total = 0
+        for item in self.cart_details.all():
+            total += item.total
+        return total
+    
 
 
 class CartDetails(models.Model):
