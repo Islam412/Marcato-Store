@@ -20,12 +20,18 @@ class Cart(models.Model):
     user = models.ForeignKey(User,related_name='cart_user', on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(_('Status'),max_length=10,choices=CART_STATUS)
 
+    def __str__(self):
+        return str(self.user)
+
 
 class CartDetails(models.Model):
     cart = models.ForeignKey(Cart,related_name='cart_details', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='cart_product', on_delete=models.SET_NULL, null=True, blank=True)
     quantity = models.IntegerField(_('Quantity'))
     total = models.FloatField(_('Total'),null=True,blank=True)
+
+    def __str__(self):
+        return str(self.cart)
 
 
 ORDER_STATUS = [
@@ -43,12 +49,19 @@ class Order(models.Model):
     coupon = models.ForeignKey('Coupon',related_name='order_coupon', on_delete=models.SET_NULL, blank=True , null=True)
     total_after_coupon = models.FloatField(_('Total after coupon'),null=True,blank=True)
 
+    def __str__(self):
+        return str(self.user)
+
+
 class OrderDetails(models.Model):
     order = models.ForeignKey(Order,related_name='order_details', on_delete=models.CASCADE)
     product = models.ForeignKey(Product, related_name='order_product', on_delete=models.SET_NULL, null=True, blank=True)
     price = models.FloatField(('Price'))
     quantity = models.IntegerField(_('Quantity'))
     total = models.FloatField(_('Total'), null=True,blank=True)
+
+    def __str__(self):
+        return str(self.order)
 
 
 class Coupon(models.Model):
