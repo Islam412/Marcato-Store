@@ -5,9 +5,9 @@ from django.utils.translation import gettext_lazy as _
 
 from userauths.models import User
 from products.models import Product
-from utils import generate_code
 
 import datetime
+import random
 # Create your models here.
 
 
@@ -34,6 +34,11 @@ class CartDetails(models.Model):
         return str(self.cart)
 
 
+def generate_code(length=10):
+    data = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    code = ''.join(random.choice(data) for _ in range(length))
+    return code
+
 ORDER_STATUS = [
     ('Recieved','Recieved'),
     ('Processed','Processed'),
@@ -43,14 +48,15 @@ ORDER_STATUS = [
 class Order(models.Model):
     user = models.ForeignKey(User,related_name='order_user', on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(('Status'), max_length=10,choices=ORDER_STATUS)
-    code = models.CharField(_('Code'), max_length=20, default=generate_code)
-    order_time = models.DateTimeField(_('Order time'),default=timezone.now())
-    delivery_time = models.DateTimeField(_('Delivery time'),null=True, blank=True)
+    code = models.CharField(_('Code'), max_length=20,default=generate_code)
+    delivery_time = models.DateTimeField(_('Delivery Time'),null=True, blank=True)
     coupon = models.ForeignKey('Coupon',related_name='order_coupon', on_delete=models.SET_NULL, blank=True , null=True)
-    total_after_coupon = models.FloatField(_('Total after coupon'),null=True,blank=True)
+    total_after_coupon = models.FloatField(_('Total After Coupon'),null=True,blank=True)
 
     def __str__(self):
         return str(self.user)
+    
+
 
 
 class OrderDetails(models.Model):
@@ -65,16 +71,16 @@ class OrderDetails(models.Model):
 
 
 class Coupon(models.Model):
-    code = models.CharField(_('Code'), max_length=20)
     image = models.ImageField(_('Image'),upload_to='coupon', blank=True, null=True)
-    quantity = models.IntegerField(_('Quantity')), 
+    code = models.CharField(_('Code'), max_length=20)
+    discount = models.IntegerField(_('Discount'))
+    quantity = models.IntegerField(_('Quantity'))
     start_date = models.DateField(_('Start Date'), default=timezone.now)
-    end_date = models.DateField(_('End Date'), null=True, blank=True)
+    end_date = models.DateField(_('End Date'), null=True,blank=True)
 
     def __str__(self):
         return self.code
     
-
 
     def save(self, *args, **kwargs):
        week = datetime.timedelta(days=7)
