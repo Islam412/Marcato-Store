@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
+from django.utils.translation import gettext_lazy as _
 from pathlib import Path
 import os
 
@@ -65,6 +65,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "django.middleware.locale.LocaleMiddleware", # django translate middelware
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
 
@@ -231,9 +232,15 @@ SIMPLE_JWT = {
 }
 
 
-# translations
+# translations settings
 LOCALE_PATHS = [
     "locale",
+]
+
+# select language
+LANGUAGES = [
+    ("ar", _("Arabic")),
+    ("en", _("English")),
 ]
 
 

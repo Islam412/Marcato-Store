@@ -31,7 +31,8 @@ urlpatterns = [
     path('products/',include('products.urls')),
     path('orders/',include('orders.urls')),
     path('dj-rest-auth/', include('dj_rest_auth.urls')),
-    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls'))
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
