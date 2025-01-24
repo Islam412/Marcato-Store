@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 
-from .models import Order , CartDetails
+from .models import Order , CartDetails , Cart
 
 # Create your views here.
 
@@ -16,6 +16,6 @@ class OrderListView(ListView):
 
 
 def checkout(request):
-    cart = Order.objects.get(user=request.user,status='InProgress')
+    cart = Cart.objects.get(user=request.user,status='InProgress')
     cart_detail = CartDetails.objects.filter(cart=cart)
     return render(request, 'orders/checkout.html',{'cart_detail':cart_detail})
