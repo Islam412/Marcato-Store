@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-24 23:42+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: orders/models.py:21
+msgid "Status"
+msgstr "الحالة"
+
+#: orders/models.py:37 orders/models.py:74 orders/models.py:85
+#: products/models.py:28
+msgid "Quantity"
+msgstr "الكمية"
+
+#: orders/models.py:38 orders/models.py:75
+msgid "Total"
+msgstr "الناتج الكلى"
+
+#: orders/models.py:58 orders/models.py:83
+msgid "Code"
+msgstr "الرمز"
+
+#: orders/models.py:60
+msgid "Delivery Time"
+msgstr "وقت التوصيل"
+
+#: orders/models.py:62
+msgid "Total After Coupon"
+msgstr "السعر بعد الخصم"
+
+#: orders/models.py:82 products/models.py:23 products/models.py:59
+#: products/models.py:68
+msgid "Image"
+msgstr "الصورة"
+
+#: orders/models.py:84
+msgid "Discount"
+msgstr "الخصم"
+
+#: orders/models.py:86
+msgid "Start Date"
+msgstr "تاريخ البداية"
+
+#: orders/models.py:87
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#: products/models.py:21 products/models.py:67
+msgid "Name"
+msgstr "الاسم"
+
+#: products/models.py:22
+msgid "Flag"
+msgstr "العلامة"
+
+#: products/models.py:24
+msgid "Price"
+msgstr "السعر"
+
+#: products/models.py:25
+msgid "SKU"
+msgstr "كود حفظ المخزون"
+
+#: products/models.py:26
+msgid "Subtitle"
+msgstr "الوصف القصير"
+
+#: products/models.py:27
+msgid "Descripition"
+msgstr "الوصف"
+
+#: products/models.py:29
+msgid "Brand"
+msgstr "الماركة"
+
+#: products/models.py:58 products/models.py:92
+msgid "Product"
+msgstr "المنتج"
+
+#: products/models.py:91
+msgid "User"
+msgstr "المستخدم"
+
+#: products/models.py:93
+msgid "Rate"
+msgstr "المستوى"
+
+#: products/models.py:94
+msgid "Review"
+msgstr "التقيم"
+
+#: products/models.py:95
+msgid "Created at"
+msgstr "تاريج الانشاء "
+
+#: userauths/models.py:12
+msgid "Frist Name"
+msgstr "الاسم الاول"
+
+#: userauths/models.py:13
+#, fuzzy
+#| msgid "Name"
+msgid "Last Name"
+msgstr "الثانى الاسم"
+
+#: userauths/models.py:14
+#, fuzzy
+#| msgid "User"
+msgid "Username"
+msgstr "الاسم المستعار"
+
+#: userauths/models.py:15
+msgid "Email"
+msgstr "الايميل"
+
+#: userauths/models.py:29
+#, fuzzy
+#| msgid "Image"
+msgid "Cover Image"
+msgstr "صورة البروفايل"
+
+#: userauths/models.py:30
+msgid "Phone"
+msgstr "رقم الفون"
+
+#: userauths/models.py:31
+msgid "Address"
+msgstr "العنوان"
+
+#: userauths/models.py:32
+msgid "Verified"
+msgstr "التحقق"
