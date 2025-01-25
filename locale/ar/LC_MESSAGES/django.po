@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-24 23:42+0200\n"
+"POT-Creation-Date: 2025-01-25 02:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,11 +85,11 @@ msgstr "الوصف القصير"
 msgid "Descripition"
 msgstr "الوصف"
 
-#: products/models.py:29
+#: products/models.py:29 templates/base.html:196 templates/base.html:676
 msgid "Brand"
 msgstr "الماركة"
 
-#: products/models.py:58 products/models.py:92
+#: products/models.py:58 products/models.py:92 templates/base.html:675
 msgid "Product"
 msgstr "المنتج"
 
@@ -109,6 +109,166 @@ msgstr "التقيم"
 msgid "Created at"
 msgstr "تاريج الانشاء "
 
+#: project/settings.py:242
+msgid "Arabic"
+msgstr "عربى"
+
+#: project/settings.py:243
+msgid "English"
+msgstr "انجليزى"
+
+#: templates/base.html:91 templates/base.html:482
+msgid "Go"
+msgstr "طبق"
+
+#: templates/base.html:101
+msgid "Offers"
+msgstr "العروض"
+
+#: templates/base.html:102 templates/base.html:682
+msgid "Need Help"
+msgstr "وسائل المساعدة"
+
+#: templates/base.html:103 templates/base.html:502 templates/base.html:648
+msgid "contact us"
+msgstr "اتصل بى"
+
+#: templates/base.html:146 templates/base.html:452
+msgid "Profile"
+msgstr "الصفحة الشخصية"
+
+#: templates/base.html:147 templates/base.html:453
+msgid "Edit Profile"
+msgstr "تعديل الصفحة الشخصية"
+
+#: templates/base.html:148 templates/base.html:454
+msgid "Log out"
+msgstr "تسجيل خروج"
+
+#: templates/base.html:166
+msgid "total price"
+msgstr "الثمن الكلى"
+
+#: templates/base.html:188 templates/base.html:488 templates/base.html:537
+#: templates/base.html:674
+msgid "Home"
+msgstr "الصفحة الرئيسية"
+
+#: templates/base.html:192 templates/base.html:491
+msgid "Shop"
+msgstr "تسوق"
+
+#: templates/base.html:200 templates/base.html:497 templates/base.html:677
+msgid "Order"
+msgstr "الطلبات"
+
+#: templates/base.html:207 templates/base.html:509
+msgid "call us"
+msgstr " اتصل بالدعم"
+
+#: templates/base.html:214
+msgid "email us<"
+msgstr "ايميل الدعم "
+
+#: templates/base.html:391
+msgid "total item"
+msgstr "الطلبات الكلية"
+
+#: templates/base.html:421
+msgid "Proceed to Checkout"
+msgstr "اذهب للدفع"
+
+#: templates/base.html:494
+#, fuzzy
+#| msgid "Brand"
+msgid "brand"
+msgstr "الماركة"
+
+#: templates/base.html:500
+msgid "offers"
+msgstr "العروض"
+
+#: templates/base.html:501
+msgid "need help"
+msgstr "وسائل المساعدة"
+
+#: templates/base.html:503
+msgid "logout"
+msgstr "تسجبل خروج"
+
+#: templates/base.html:516
+#, fuzzy
+#| msgid "Email"
+msgid "email us"
+msgstr "الايميل"
+
+#: templates/base.html:522
+msgid "All Rights Reserved by "
+msgstr "جميع الحقوق محفوظة ل"
+
+#: templates/base.html:541
+msgid "cartlist"
+msgstr ""
+
+#: templates/base.html:546
+msgid "wishlist"
+msgstr "قائمة المفضلة"
+
+#: templates/base.html:551
+msgid "category"
+msgstr "الكاتوجري"
+
+#: templates/base.html:581
+msgid "free home delivery"
+msgstr "التوصيل مجانى"
+
+#: templates/base.html:582 templates/base.html:593 templates/base.html:604
+#: templates/base.html:615
+msgid "Lorem ipsum dolor sit amet adipisicing elit nobis."
+msgstr "اسرع اداء افضل نتيجة"
+
+#: templates/base.html:592
+msgid "instant return policy"
+msgstr ""
+
+#: templates/base.html:603
+msgid "quick support system"
+msgstr ""
+
+#: templates/base.html:614
+msgid "secure payment way"
+msgstr ""
+
+#: templates/base.html:671
+msgid "quick Links"
+msgstr "الوصول السريع"
+
+#: templates/base.html:680
+msgid "My Account"
+msgstr "الصفحة الشخصية"
+
+#: templates/base.html:681
+msgid "Contact"
+msgstr "اتصل بي"
+
+#: templates/base.html:683
+msgid "Offer"
+msgstr "العروض"
+
+#: templates/base.html:690
+msgid "Download App"
+msgstr ""
+
+#: templates/base.html:691
+msgid ""
+"Lorem ipsum dolor sit amet tenetur dignissimos ipsum eligendi autem "
+"obcaecati minus ducimus totam reprehenderit exercitationem!"
+msgstr ""
+
+#: templates/base.html:702
+msgid "All Copyrights Reserved by "
+msgstr "جميع الحقوق محفوظة "
+
 #: userauths/models.py:12
 msgid "Frist Name"
 msgstr "الاسم الاول"
@@ -117,7 +277,7 @@ msgstr "الاسم الاول"
 #, fuzzy
 #| msgid "Name"
 msgid "Last Name"
-msgstr "الثانى الاسم"
+msgstr "الاسم الثانى"
 
 #: userauths/models.py:14
 #, fuzzy

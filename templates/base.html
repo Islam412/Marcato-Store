@@ -1,8 +1,9 @@
 
 {% load static %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" {% if LANGUAGE_CODE == 'ar' %} dir="rtl" {% endif %}>
     <head>
         <!--=====================================
                     META TAG PART START
@@ -34,23 +35,39 @@
         <link rel="icon" href="{{ company_data.logo.url }}">
 
         <!-- FONTS -->
-        <link rel="stylesheet" href="{% static 'fonts/flaticon/flaticon.css' %}">
-        <link rel="stylesheet" href="{% static 'fonts/icofont/icofont.min.css' %}">
-        <link rel="stylesheet" href="{% static 'fonts/fontawesome/fontawesome.min.css' %}">
-
-        <!-- VENDOR -->
-        <link rel="stylesheet" href="{% static 'vendor/venobox/venobox.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendor/slickslider/slick.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendor/niceselect/nice-select.min.css' %}">
-        <link rel="stylesheet" href="{% static 'vendor/bootstrap/bootstrap.min.css' %}">
-
-        <!-- CUSTOM -->
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        {% if LANGUAGE_CODE == 'en' %}
         
-        {% block css %}
-            <link rel="stylesheet" href="{% static 'css/index.css' %}">
-        {% endblock css %}
+            <link rel="stylesheet" href="{% static 'en/fonts/flaticon/flaticon.css' %}">
+            <link rel="stylesheet" href="{% static 'en/fonts/icofont/icofont.min.css' %}">
+            <link rel="stylesheet" href="{% static 'en/fonts/fontawesome/fontawesome.min.css' %}">
+
+            <!-- VENDOR -->
+            <link rel="stylesheet" href="{% static 'en/vendor/venobox/venobox.min.css' %}">
+            <link rel="stylesheet" href="{% static 'en/vendor/slickslider/slick.min.css' %}">
+            <link rel="stylesheet" href="{% static 'en/vendor/niceselect/nice-select.min.css' %}">
+            <link rel="stylesheet" href="{% static 'en/vendor/bootstrap/bootstrap.min.css' %}">
+
+            <!-- CUSTOM -->
+            <link rel="stylesheet" href="{% static 'en/css/main.css' %}">
             
+            
+        {% else %}
+            <link rel="stylesheet" href="{% static 'ar/fonts/flaticon/flaticon.css' %}">
+            <link rel="stylesheet" href="{% static 'ar/fonts/icofont/icofont.min.css' %}">
+            <link rel="stylesheet" href="{% static 'ar/fonts/fontawesome/fontawesome.min.css' %}">
+
+            <!-- VENDOR -->
+            <link rel="stylesheet" href="{% static 'ar/vendor/venobox/venobox.min.css' %}">
+            <link rel="stylesheet" href="{% static 'ar/vendor/slickslider/slick.min.css' %}">
+            <link rel="stylesheet" href="{% static 'ar/vendor/niceselect/nice-select.min.css' %}">
+            <link rel="stylesheet" href="{% static 'ar/vendor/bootstrap/bootstrap.min.css' %}">
+
+            <!-- CUSTOM -->
+            <link rel="stylesheet" href="{% static 'ar/css/main.css' %}">
+        {% endif %}
+        {% block css %}
+            <link rel="stylesheet" href="{% static 'en/css/index.css' %}">
+        {% endblock css %}
         <!--=====================================
                     CSS LINK PART END
         =======================================-->
@@ -88,7 +105,7 @@
                                             </option>
                                         {% endfor %}
                                     </select>
-                                    <input type="submit" value="  Go" style="color: #FFFFFF;">
+                                    <input type="submit" value="  {% translate "Go" %}" style="color: #FFFFFF;">
                                 </form>
 
 
@@ -98,9 +115,9 @@
                     </div>
                     <div class="col-md-7 col-lg-4">
                         <ul class="header-top-list">
-                            <li><a href="offer.html">offers</a></li>
-                            <li><a href="{% url 'settings:faq' %}">need help</a></li>
-                            <li><a href="{% url 'settings:contact' %}">contact us</a></li>
+                            <li><a href="offer.html">{% translate "Offers" %}</a></li>
+                            <li><a href="{% url 'settings:faq' %}">{% translate "Need Help" %}</a></li>
+                            <li><a href="{% url 'settings:contact' %}">{% translate "contact us" %}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -143,9 +160,9 @@
                             {% endif %}
                         </button>
                         <ul class="dropdown-position-list navbar-link">
-                            <li><a href="{% url 'userauths:profile' %}">Profile</a></li>
-                            <li><a href="{% url 'userauths:profile-edit' %}">Edit Profile</a></li>
-                            <li><a href="{% url 'userauths:sign-out' %}">Log out</a></li>
+                            <li><a href="{% url 'userauths:profile' %}">{% translate "Profile" %}</a></li>
+                            <li><a href="{% url 'userauths:profile-edit' %}">{% translate "Edit Profile" %}</a></li>
+                            <li><a href="{% url 'userauths:sign-out' %}">{% translate "Log out" %}</a></li>
                         </ul>
                     </div>
         
@@ -163,7 +180,7 @@
                         <button class="header-widget header-cart" title="Cartlist">
                             <i class="fas fa-shopping-basket"></i>
                             <sup>{{cart_detail_data|length}}</sup>
-                            <span>total price<small>${{cart_data.cart_total}}</small></span>
+                            <span>{% translate "total price" %}<small>${{cart_data.cart_total}}</small></span>
                         </button>
                     </div>
                 </div>
@@ -185,33 +202,33 @@
                         <div class="navbar-content">
                             <ul class="navbar-list">
                                 <li class="navbar-item">
-                                    <a class="navbar-link" href="/">home</a>
+                                    <a class="navbar-link" href="/">{% translate "Home" %}</a>
                                 </li>
 
                                 <li class="navbar-item">
-                                    <a class="navbar-link" href="{% url 'products:product_list' %}">Shop</a>
+                                    <a class="navbar-link" href="{% url 'products:product_list' %}">{% translate "Shop" %}</a>
                                 </li>
 
                                 <li class="navbar-item">
-                                    <a class="navbar-link" href="{% url 'products:brand_list' %}">Brand</a>
+                                    <a class="navbar-link" href="{% url 'products:brand_list' %}">{% translate "Brand" %}</a>
                                 </li>
 
                                 <li class="navbar-item">
-                                    <a class="navbar-link" href="{% url 'orders:order_list' %}">Order</a>
+                                    <a class="navbar-link" href="{% url 'orders:order_list' %}">{% translate "Order" %}</a>
                                 </li>
                             </ul>
                             <div class="navbar-info-group">
                                 <div class="navbar-info">
                                     <i class="icofont-ui-touch-phone"></i>
                                     <p>
-                                        <small>call us</small>
+                                        <small>{% translate "call us" %}</small>
                                         <span>{{ company_data.call_us }}</span>
                                     </p>
                                 </div>
                                 <div class="navbar-info">
                                     <i class="icofont-ui-email"></i>
                                     <p>
-                                        <small>email us</small>
+                                        <small>{% translate "email us" %}</small>
                                         <span>{{ company_data.email_us }}</span>
                                     </p>
                                 </div>
@@ -388,7 +405,7 @@
             <div class="cart-header">
                 <div class="cart-total">
                     <i class="fas fa-shopping-basket"></i>
-                    <span>total item ({{cart_detail_data|length}})</span>
+                    <span>{% translate "total item" %} ({{cart_detail_data|length}})</span>
                 </div>
                 <button class="cart-close"><i class="icofont-close"></i></button>
             </div>
@@ -418,7 +435,7 @@
             </ul>
             <div class="cart-footer">
                 <a class="cart-checkout-btn" href="{% url 'orders:checkout' %}">
-                    <span class="checkout-label">Proceed to Checkout</span>
+                    <span class="checkout-label">{% translate "Proceed to Checkout" %}</span>
                     <span class="checkout-price">${{cart_data.cart_total}}</span>
                 </a>
             </div>
@@ -449,9 +466,9 @@
                         </a>
 
                         <ul class="dropdown-position-list navbar-link">
-                            <li><a href="{% url 'userauths:profile' %}">Profile</a></li>
-                            <li><a href="{% url 'userauths:profile-edit' %}">Edit Profile</a></li>
-                            <li><a href="{% url 'userauths:sign-out' %}">Log out</a></li>
+                            <li><a href="{% url 'userauths:profile' %}">{% translate "Profile" %}</a></li>
+                            <li><a href="{% url 'userauths:profile-edit' %}">{% translate "Edit Profile" %}</a></li>
+                            <li><a href="{% url 'userauths:sign-out' %}">{% translate "Log out" %}</a></li>
                         </ul>
                     </div>
 
@@ -467,49 +484,59 @@
                 <div class="nav-select-group">
                     <div class="nav-select">
                         <i class="icofont-world"></i>
-                        <select class="select">
-                            <option value="english" selected>English</option>
-                            <option value="arabic">Arabic</option>
-                        </select>
+                        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <select name="language" class="select">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                                        {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <input type="submit" value="  {% translate "Go" %}" style="color: #FFFFFF;">
+                        </form>
                     </div>
                 </div>
                 <ul class="nav-list">
                     <li>
-                        <a class="nav-link" href="/">Home</a>
+                        <a class="nav-link" href="/">{% translate "Home" %}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{% url 'products:product_list' %}">Shop</a>
+                        <a class="nav-link" href="{% url 'products:product_list' %}">{% translate "Shop" %}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{% url 'products:brand_list' %}">brand</a>
+                        <a class="nav-link" href="{% url 'products:brand_list' %}">{% translate "brand" %}</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{% url 'orders:order_list' %}">Order</a>
+                        <a class="nav-link" href="{% url 'orders:order_list' %}">{% translate "Order" %}</a>
                     </li>
 
-                    <li><a class="nav-link" href="offer.html"><i class="icofont-sale-discount"></i>offers</a></li>
-                    <li><a class="nav-link" href="{% url 'settings:faq' %}">need help</a></li>
-                    <li><a class="nav-link" href="{% url 'settings:contact' %}">contact us</a></li>
-                    <li><a class="nav-link" href="{% url 'userauths:sign-out' %}">logout</a></li>
+                    <li><a class="nav-link" href="offer.html"><i class="icofont-sale-discount"></i>{% translate "offers" %}</a></li>
+                    <li><a class="nav-link" href="{% url 'settings:faq' %}">{% translate "need help" %}</a></li>
+                    <li><a class="nav-link" href="{% url 'settings:contact' %}">{% translate "contact us" %}</a></li>
+                    <li><a class="nav-link" href="{% url 'userauths:sign-out' %}">{% translate "logout" %}</a></li>
                 </ul>
                 <div class="nav-info-group">
                     <div class="nav-info">
                         <i class="icofont-ui-touch-phone"></i>
                         <p>
-                            <small>call us</small>
+                            <small>{% translate "call us" %}</small>
                             <span>{{ company_data.call_us }}</span>
                         </p>
                     </div>
                     <div class="nav-info">
                         <i class="icofont-ui-email"></i>
                         <p>
-                            <small>email us</small>
+                            <small>{% translate "email us" %}</small>
                             <span>{{ company_data.email_us }}</span>
                         </p>
                     </div>
                 </div>
                 <div class="nav-footer">
-                    <p>All Rights Reserved by <a href="https://github.com/Islam412">Islam Hamdy</a></p>
+                    <p>{% translate "All Rights Reserved by " %}<a href="https://github.com/Islam412">Islam Hamdy</a></p>
                 </div>
             </div>
         </aside>
@@ -524,21 +551,21 @@
         <div class="mobile-menu">
             <a href="/" title="Home Page">
                 <i class="fas fa-home"></i>
-                <span>Home</span>
+                <span>{% translate "Home" %}</span>
             </a>
             <button class="cart-btn" title="Cartlist">
                 <i class="fas fa-shopping-basket"></i>
-                <span>cartlist</span>
+                <span>{% translate "cartlist" %}</span>
                 <sup>{{cart_detail_data|length}}</sup>
             </button>
             <a href="wishlist.html" title="Wishlist">
                 <i class="fas fa-heart"></i>
-                <span>wishlist</span>
+                <span>{% translate "wishlist" %}</span>
                 <sup>0</sup>
             </a>
             <button class="cate-btn" title="Category List">
                 <i class="fas fa-list"></i>
-                <span>category</span>
+                <span>{% translate "category" %}</span>
             </button>
         </div>
         <!--=====================================
@@ -568,8 +595,8 @@
                                 <i class="fas fa-truck"></i>
                             </div>
                             <div class="intro-content">
-                                <h5>free home delivery</h5>
-                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                                <h5>{% translate "free home delivery" %}</h5>
+                                <p>{% translate "Lorem ipsum dolor sit amet adipisicing elit nobis." %}</p>
                             </div>
                         </div>
                     </div>
@@ -579,8 +606,8 @@
                                 <i class="fas fa-sync-alt"></i>
                             </div>
                             <div class="intro-content">
-                                <h5>instant return policy</h5>
-                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                                <h5>{% translate "instant return policy" %}</h5>
+                                <p>{% translate "Lorem ipsum dolor sit amet adipisicing elit nobis." %}</p>
                             </div>
                         </div>
                     </div>
@@ -590,8 +617,8 @@
                                 <i class="fas fa-headset"></i>
                             </div>
                             <div class="intro-content">
-                                <h5>quick support system</h5>
-                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                                <h5>{% translate "quick support system" %}</h5>
+                                <p>{% translate "Lorem ipsum dolor sit amet adipisicing elit nobis." %}</p>
                             </div>
                         </div>
                     </div>
@@ -601,8 +628,8 @@
                                 <i class="fas fa-lock"></i>
                             </div>
                             <div class="intro-content">
-                                <h5>secure payment way</h5>
-                                <p>Lorem ipsum dolor sit amet adipisicing elit nobis.</p>
+                                <h5>{% translate "secure payment way" %}</h5>
+                                <p>{% translate "Lorem ipsum dolor sit amet adipisicing elit nobis." %}</p>
                             </div>
                         </div>
                     </div>
@@ -635,7 +662,7 @@
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget contact">
-                            <h3 class="footer-title">contact us</h3>
+                            <h3 class="footer-title">{% translate "contact us" %}</h3>
                             <ul class="footer-contact">
                                 <li>
                                     <i class="icofont-ui-email"></i>
@@ -658,27 +685,27 @@
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
-                            <h3 class="footer-title">quick Links</h3>
+                            <h3 class="footer-title">{% translate "quick Links" %}</h3>
                             <div class="footer-links">
                                 <ul>
-                                    <li><a href="/">Home</a></li>
-                                    <li><a href="{% url 'products:product_list' %}">Product</a></li>
-                                    <li><a href="{% url 'products:brand_list' %}">Brand</a></li>
-                                    <li><a href="{% url 'orders:order_list' %}">Order</a></li>
+                                    <li><a href="/">{% translate "Home" %}</a></li>
+                                    <li><a href="{% url 'products:product_list' %}">{% translate "Product" %}</a></li>
+                                    <li><a href="{% url 'products:brand_list' %}">{% translate "Brand" %}</a></li>
+                                    <li><a href="{% url 'orders:order_list' %}">{% translate "Order" %}</a></li>
                                 </ul>
                                 <ul>
-                                    <li><a href="{% url 'userauths:profile' %}">My Account</a></li>
-                                    <li><a href="{% url 'settings:contact' %}">Contact</a></li>
-                                    <li><a href="{% url 'settings:faq' %}">Need Help</a></li>
-                                    <li><a href="#">Offer</a></li>
+                                    <li><a href="{% url 'userauths:profile' %}">{% translate "My Account" %}</a></li>
+                                    <li><a href="{% url 'settings:contact' %}">{% translate "Contact" %}</a></li>
+                                    <li><a href="{% url 'settings:faq' %}">{% translate "Need Help" %}</a></li>
+                                    <li><a href="#">{% translate "Offer" %}</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 col-xl-3">
                         <div class="footer-widget">
-                            <h3 class="footer-title">Download App</h3>
-                            <p class="footer-desc">Lorem ipsum dolor sit amet tenetur dignissimos ipsum eligendi autem obcaecati minus ducimus totam reprehenderit exercitationem!</p>
+                            <h3 class="footer-title">{% translate "Download App" %}</h3>
+                            <p class="footer-desc">{% translate "Lorem ipsum dolor sit amet tenetur dignissimos ipsum eligendi autem obcaecati minus ducimus totam reprehenderit exercitationem!" %}</p>
                             <div class="footer-app">
                                 <a href="{{ company_data.android_app }}"><img src="{% static 'images/apps/android.webp' %}" alt="google"></a>
                                 <a href="{{ company_data.ios_app }}"><img src="{% static 'images/apps/iOS.webp' %}" alt="app"></a>
@@ -689,7 +716,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="footer-bottom">
-                            <p class="footer-copytext">&copy;  All Copyrights Reserved by <a target="_blank" href="https://github.com/Islam412">Islam Hamdy</a></p>
+                            <p class="footer-copytext">&copy;  {% translate "All Copyrights Reserved by " %}<a target="_blank" href="https://github.com/Islam412">Islam Hamdy</a></p>
                         </div>
                     </div>
                 </div>
@@ -703,22 +730,40 @@
         <!--=====================================
                     JS LINK PART START
         =======================================-->
-        <!-- VENDOR -->
-        <script src="{% static 'vendor/bootstrap/jquery-1.12.4.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/popper.min.js' %}"></script>
-        <script src="{% static 'vendor/bootstrap/bootstrap.min.js' %}"></script>
-        <script src="{% static 'vendor/countdown/countdown.min.js' %}"></script>
-        <script src="{% static 'vendor/niceselect/nice-select.min.js' %}"></script>
-        <script src="{% static 'vendor/slickslider/slick.min.js' %}"></script>
-        <script src="{% static 'vendor/venobox/venobox.min.js' %}"></script>
+        {% if LANGUAGE_CODE == 'en' %}
+            <script src="{% static 'en/vendor/bootstrap/jquery-1.12.4.min.js' %}"></script>
+            <script src="{% static 'en/vendor/bootstrap/popper.min.js' %}"></script>
+            <script src="{% static 'en/vendor/bootstrap/bootstrap.min.js' %}"></script>
+            <script src="{% static 'en/vendor/countdown/countdown.min.js' %}"></script>
+            <script src="{% static 'en/vendor/niceselect/nice-select.min.js' %}"></script>
+            <script src="{% static 'en/vendor/slickslider/slick.min.js' %}"></script>
+            <script src="{% static 'en/vendor/venobox/venobox.min.js' %}"></script>
 
-        <!-- CUSTOM -->
-        <script src="{% static 'js/nice-select.js' %}"></script>
-        <script src="{% static 'js/countdown.js' %}"></script>
-        <script src="{% static 'js/accordion.js' %}"></script>
-        <script src="{% static 'js/venobox.js' %}"></script>
-        <script src="{% static 'js/slick.js' %}"></script>
-        <script src="{% static 'js/main.js' %}"></script> 
+            <!-- CUSTOM -->
+            <script src="{% static 'en/js/nice-select.js' %}"></script>
+            <script src="{% static 'en/js/countdown.js' %}"></script>
+            <script src="{% static 'en/js/accordion.js' %}"></script>
+            <script src="{% static 'en/js/venobox.js' %}"></script>
+            <script src="{% static 'en/js/slick.js' %}"></script>
+            <script src="{% static 'en/js/main.js' %}"></script> 
+        {% else %}
+            <script src="{% static 'ar/vendor/bootstrap/jquery-1.12.4.min.js' %}"></script>
+            <script src="{% static 'ar/vendor/bootstrap/popper.min.js' %}"></script>
+            <script src="{% static 'ar/vendor/bootstrap/bootstrap.min.js' %}"></script>
+            <script src="{% static 'ar/vendor/countdown/countdown.min.js' %}"></script>
+            <script src="{% static 'ar/vendor/niceselect/nice-select.min.js' %}"></script>
+            <script src="{% static 'ar/vendor/slickslider/slick.min.js' %}"></script>
+            <script src="{% static 'ar/vendor/venobox/venobox.min.js' %}"></script>
+
+            <!-- CUSTOM -->
+            <script src="{% static 'ar/js/nice-select.js' %}"></script>
+            <script src="{% static 'ar/js/countdown.js' %}"></script>
+            <script src="{% static 'ar/js/accordion.js' %}"></script>
+            <script src="{% static 'ar/js/venobox.js' %}"></script>
+            <script src="{% static 'ar/js/slick.js' %}"></script>
+            <script src="{% static 'ar/js/main.js' %}"></script> 
+        {% endif %}
+        <!-- VENDOR -->
         <!--=====================================
                     JS LINK PART END
         =======================================-->
