@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+    {% if LANGUAGE_CODE == 'en' %}
+        <link rel="stylesheet" href="{% static 'en/css/index.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'ar/css/index.css' %}">
+    {% endif %}
 {% endblock css %}
 
 {% block boody %}
@@ -72,7 +76,7 @@
                         </div>
                         <div class="col-md-6 col-lg-6">
                             <div class="banner-img">
-                                <img src="{% static 'images/home/index/01.png' %}" alt="index">
+                                <img src="{% static 'en/images/home/index/01.png' %}" alt="index">
                             </div>
                         </div>
                     </div>
@@ -83,7 +87,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6 col-lg-6">
                             <div class="banner-img">
-                                <img src="{% static 'images/home/index/02.png' %}" alt="index">
+                                <img src="{% static 'en/images/home/index/02.png' %}" alt="index">
                             </div>
                         </div>
                         <div class="col-md-6 col-lg-6">

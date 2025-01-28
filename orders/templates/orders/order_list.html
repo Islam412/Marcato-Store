@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/orderlist.css' %}">
+    {% if LANGUAGE_CODE == 'en' %}
+        <link rel="stylesheet" href="{% static 'en/css/orderlist.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'ar/css/orderlist.css' %}">
+    {% endif %}
 {% endblock css %}
 
 {% block boody %}

@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/faq.css' %}">
+    {% if LANGUAGE_CODE == 'en' %}
+        <link rel="stylesheet" href="{% static 'en/css/faq.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'ar/css/faq.css' %}">
+    {% endif %}
 {% endblock css %}
     
 {% block boody %}

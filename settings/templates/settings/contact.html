@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    {% if LANGUAGE_CODE == 'en' %}
+        <link rel="stylesheet" href="{% static 'en/css/contact.css' %}">
+    {% else %}
+        <link rel="stylesheet" href="{% static 'ar/css/contact.css' %}">
+    {% endif %}
 {% endblock css %}
     
 {% block boody %}
