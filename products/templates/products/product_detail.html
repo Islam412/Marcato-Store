@@ -84,16 +84,18 @@
                                 </ul>
                             </div>
                             <div class="details-add-group">
-                                <form action="" method="post">
+                                <form action="{% url 'orders:add_to_cart' %}" method="post">
                                     {% csrf_token %}
                                     <input title="Quantity Number" type="text" name="quantity" value="1" 
                                         style="background-color: #119744; border: 2px solid #119744; border-radius: 10px; 
                                                 padding: 3px; width: 495px; height: 49px; margin-bottom: 15px; 
                                                 text-align: center; line-height: 50px; color: white;">
 
+                                    <input type="hidden" name="product_id" value="{{product.id}}">
 
 
-                                    <button class="product-add" title="Add to Cart">
+
+                                    <button type="submit" class="product-add" title="Add to Cart">
                                         <i class="fas fa-shopping-basket"></i>
                                         <span>add to cart</span>
                                     </button>
