@@ -84,16 +84,25 @@
                                 </ul>
                             </div>
                             <div class="details-add-group">
-                                <button class="product-add" title="Add to Cart">
-                                    <i class="fas fa-shopping-basket"></i>
-                                    <span>add to cart</span>
-                                </button>
-                                <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
-                                    <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
-                                </div>
+                                <form action="" method="post">
+                                    {% csrf_token %}
+                                    <input title="Quantity Number" type="text" name="quantity" value="1" 
+                                        style="background-color: #119744; border: 2px solid #119744; border-radius: 10px; 
+                                                padding: 3px; width: 495px; height: 49px; margin-bottom: 15px; 
+                                                text-align: center; line-height: 50px; color: white;">
+
+
+
+                                    <button class="product-add" title="Add to Cart">
+                                        <i class="fas fa-shopping-basket"></i>
+                                        <span>add to cart</span>
+                                    </button>
+
+
+
+                                </form>
                             </div>
+                            
                             <div class="details-action-group">
                                 <a class="details-wish wish" href="#" title="Add Your Wishlist">
                                     <i class="icofont-heart"></i>
