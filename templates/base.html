@@ -413,7 +413,7 @@
                 {% for item in cart_detail_data %}
                     <li class="cart-item">
                         <div class="cart-media">
-                            <a href="#"><img src="{{item.product.image.url}}" alt="product"></a>
+                            <a href="{% url 'products:product_detail' item.product.slug %}"><img src="{{item.product.image.url}}" alt="product"></a>
                             
                             
                         </div>
@@ -425,7 +425,15 @@
                             <div class="cart-action-group">
                                 <div class="product-action">
                                     <input class="action-input" title="Quantity Number" type="text" name="quantity" value="{{item.quantity}}">
-                                    <a href="{% url 'orders:remove_from_cart' item.id %}" class="action-input"><i class="far fa-trash-alt"></i></a>
+                                    {% comment %} <a href="{% url 'orders:remove_from_cart' item.id %}" class="action-input"><i class="far fa-trash-alt"></i></a> {% endcomment %}
+
+                                    <a href="{% url 'orders:remove_from_cart' item.id %}" 
+                                        style="display: inline-block; padding: 3px 12px; background-color: #dc3545; color: white; border-radius: 6px; text-decoration: none; transition: background 0.3s;"
+                                        onmouseover="this.style.backgroundColor='#c82333'"
+                                        onmouseout="this.style.backgroundColor='#dc3545'">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+
                                 </div>
                                 <h6>${{item.total}}</h6>
                             </div>
