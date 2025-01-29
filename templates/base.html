@@ -414,11 +414,12 @@
                     <li class="cart-item">
                         <div class="cart-media">
                             <a href="#"><img src="{{item.product.image.url}}" alt="product"></a>
-                            <button class="cart-delete"><i class="far fa-trash-alt"></i></button>
+                            <a href=""><button class="cart-delete"><i class="far fa-trash-alt"></i></button></a>
+                            
                         </div>
                         <div class="cart-info-group">
                             <div class="cart-info">
-                                <h6><a href="product-single.html">{{item.product}}</a></h6>
+                                <h6><a href="{% url 'products:product_detail' item.product.slug %}">{{item.product}}</a></h6>
                                 <p>Unit Price - ${{item.product.price}}</p>
                             </div>
                             <div class="cart-action-group">
