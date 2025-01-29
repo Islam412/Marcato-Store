@@ -414,7 +414,7 @@
                     <li class="cart-item">
                         <div class="cart-media">
                             <a href="#"><img src="{{item.product.image.url}}" alt="product"></a>
-                            <a href=""><button class="cart-delete"><i class="far fa-trash-alt"></i></button></a>
+                            
                             
                         </div>
                         <div class="cart-info-group">
@@ -424,9 +424,8 @@
                             </div>
                             <div class="cart-action-group">
                                 <div class="product-action">
-                                    <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
                                     <input class="action-input" title="Quantity Number" type="text" name="quantity" value="{{item.quantity}}">
-                                    <button class="action-plus" title="Quantity Plus"><i class="icofont-plus"></i></button>
+                                    <a href="{% url 'orders:remove_from_cart' item.id %}" class="action-input"><i class="far fa-trash-alt"></i></a>
                                 </div>
                                 <h6>${{item.total}}</h6>
                             </div>

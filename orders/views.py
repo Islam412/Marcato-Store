@@ -27,16 +27,16 @@ def add_to_cart(request):
     cart_detail , creeate = CartDetails.objects.get_or_create(cart=cart, product=product)
 
     cart_detail.quantity = int(quantity)
-    cart_detail.total = round(int(quantity)* product.price , 2)
+    cart_detail.total = round(int(quantity) * product.price , 2)
     cart_detail.save()
 
-    return redirect(f'/products/{product.slug}')
+    return redirect (f'/products/{product.slug}')
 
 
 def remove_from_cart(request,id):
     cart_detail = CartDetails.objects.get(id=id)
     cart_detail.delete()
-    return redirect('orders:add_to_cart')
+    return redirect('/products/')
 
 
 @login_required 
