@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import generics
 from rest_framework.response import Response
 
-from .serializers import CartDetailSerializer , CartSerializer
+from .serializers import CartDetailSerializer , CartSerializer , OrderListSerializer , OrderDetailsSerializer
 from .models import Cart , CartDetails , Order, OrderDetails
 from products.models import Product
 from userauths.models import User
@@ -46,3 +46,16 @@ class CartDetailCreateAPI(generics.GenericAPIView):
         cart = Cart.objects.get(user=user,status='InProgress')
         data = CartSerializer(cart).data
         return Response({'message':'Cart product deleted successfully' ,'cart':data})
+    
+
+
+class OrderListAPI(generics.ListAPIView):
+    serializer_class = OrderListSerializer
+    permission_classes = [AllowAny]
+    queryset = Order.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        user = User.objects.get(username=self.kwargs['username'])
+        queryset = self.get_queryset().filter(user=user)
+        data = OrderListSerializer(queryset, many=True).data
+        return Response(data)
