@@ -14,6 +14,7 @@ class CartDetailSerializer(serializers.Serializer):
 
 class CartSerializer(serializers.ModelSerializer):
     cart_details = CartDetailSerializer(many=True)
+    coupon = serializers.StringRelatedField()
 
     class Meta:
         model = Cart
