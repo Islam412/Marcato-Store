@@ -18,3 +18,28 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = '__all__'
+
+
+class OrderListSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+    
+    class Meta:
+        model = Order
+        fields = '__all__
+
+
+
+class OrderProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrderDetails
+        fields = '__all__'
+
+
+class OrderDetailsSerializer(serializers.ModelSerializer):
+    user = serializers.StringRelatedField()
+    product = OrderProductSerializers(many=True, source='order_details')
+
+    class Meta:
+        model = Order
+        fields = '__all__
+

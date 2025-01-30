@@ -45,4 +45,4 @@ class CartDetailCreateAPI(generics.GenericAPIView):
 
         cart = Cart.objects.get(user=user,status='InProgress')
         data = CartSerializer(cart).data
-        return Response({'message':'Cart item deleted successfully' ,'cart':data})
+        return Response({'message':'Cart product deleted successfully' ,'cart':data})
