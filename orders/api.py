@@ -73,7 +73,11 @@ class CreateOrderAPI(generics.GenericAPIView):
         cart_details = CartDetails.objects.filter(cart=cart)
 
         # cart create order
-        
+        new_order = Order.objects.create(
+            user = user,
+            coupon = cart.coupon,
+        )
+
 
 
 class ApplyCouponAPI(generics.GenericAPIView):

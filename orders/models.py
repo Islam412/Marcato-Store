@@ -20,6 +20,7 @@ class Cart(models.Model):
     user = models.ForeignKey(User,related_name='cart_user', on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(_('Status'),max_length=10,choices=CART_STATUS)
     coupon = models.ForeignKey('Coupon',related_name='cart_coupon', on_delete=models.SET_NULL, blank=True , null=True)
+    total_after_coupon = models.FloatField(_('Total After Coupon'),null=True,blank=True)
 
 
     def __str__(self):
