@@ -65,3 +65,16 @@ class OrderDetailsAPI(generics.RetrieveAPIView):
     serializer_class = OrderListSerializer
     permission_classes = [AllowAny]
     queryset = Order.objects.all()
+
+class CreateOrderAPI(generics.GenericAPIView):
+    def get(self, request, *args, **kwargs):
+        user = User.objects.get(username=self.kwargs['username'])
+        cart = Cart.objects.get(user=user,status='InProgress')
+        cart_details = CartDetails.objects.filter(cart=cart)
+
+        # cart create order
+        
+
+
+class ApplyCouponAPI(generics.GenericAPIView):
+    pass
