@@ -19,6 +19,5 @@ urlpatterns = [
     path('api/list/<str:username>/create-order' ,CreateOrderAPI.as_view(), name='CreateOrderAPI'),
     path('api/list/<str:username>/<int:pk>' ,OrderDetailsAPI.as_view(), name='OrderDetailsAPI'),
     path('api/<str:username>/cart' ,CartDetailCreateAPI.as_view(), name='CartDetailCreateAPI'),
-    path('api/<str:username>/cart' ,CartDetailCreateAPI.as_view(), name='CartDetailCreateAPI'),
-    path('api/<str:username>/cart/apoly-coupon' ,ApplyCouponAPI.as_view(), name='CartDetailCreateAPI'),
+    path('api/<str:username>/cart/apply-coupon' ,ApplyCouponAPI.as_view(), name='CartDetailCreateAPI'),
 ]
