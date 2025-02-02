@@ -1,7 +1,7 @@
 Heroku :
     -create account at Heroku
     -install heroku cli
-    
+     
     -django project :
         -crate Procfile
         -runtime.txt

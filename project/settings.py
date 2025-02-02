@@ -65,6 +65,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "django.middleware.locale.LocaleMiddleware", # django translate middelware
     'django.middleware.common.CommonMiddleware',
@@ -244,6 +245,15 @@ LANGUAGES = [
     ("en", _("English")),
 ]
 
+# herouko settings
+STORAGES = {
+    # ...
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+# django_heroku.settings[locals]
 
 # JAZZMIN settings
 JAZZMIN_SETTINGS = {
