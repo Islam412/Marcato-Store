@@ -7,7 +7,7 @@ from django.views.decorators.cache import cache_page # python raises py caching 
 
 
 from .models import Product, Brand, ProductImage, Review
-
+from .tasks import send_email
 
 
 @cache_page(60 * 1)
@@ -22,9 +22,20 @@ def queryset_debug(request):
     # data = Product.objects.annotate(price_with_tax=F('price')*1.2) # add new tower
 
     data = Product.objects.all()
+
     
     return render(request, 'products/queryset_debug.html', {'data': data})
 
+
+def send_emails(request):
+    if request.method == 'GET':
+        send_email.delay()  
+        return render(request, 'products/send_email.html')
+
+    elif request.method == 'POST':
+        progress = cache.get('email_progress', 'No progress yet.')
+        sent_emails = cache.get('sent_emails', [])
+        return JsonResponse({'status': progress, 'sent_emails': sent_emails})
 
 class ProductList(ListView):
     model = Product
