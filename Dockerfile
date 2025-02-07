@@ -9,7 +9,7 @@ ENV PYTHONUNBUFFERED = 1
 
 
 # update linux kernal & setup tools
-RUN sudo dnf update -y && sudo dnf install -y gcc postgresql-devel
+RUN apt-get update && apt-get -y install gcc libpq-dev
 
 
 # add folder project

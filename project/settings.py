@@ -265,15 +265,20 @@ STORAGES = {
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        # "LOCATION": "redis://127.0.0.1:6379", # without docker
+        "LOCATION": 'redis://myredis:6379/0',  # on docker
     }
 }
 
 
 # django celery settings
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+# CELERY_BROKER_URL = 'redis://localhost:6379/0'
+# CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 
+
+# docker connet celery and redis
+CELERY_BROKER_URL = 'redis://myredis:6379/0'
+CELERY_RESULT_BACKEND = 'redis://myredis:6379/0'
 
 
 # JAZZMIN settings
