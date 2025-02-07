@@ -261,6 +261,17 @@ STORAGES = {
 
 # django_heroku.settings[locals]
 
+# django cache settings
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+
+
+
 # JAZZMIN settings
 JAZZMIN_SETTINGS = {
     'site_header': "Marcato store",
