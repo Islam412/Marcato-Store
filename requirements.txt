@@ -29,6 +29,8 @@ packaging==24.2
 pillow==11.0.0
 polib==1.2.0
 prompt_toolkit==3.0.50
+psycopg2==2.9.10
+psycopg2-binary==2.9.10
 PyJWT==2.9.0
 python-dateutil==2.9.0.post0
 redis==5.2.1
