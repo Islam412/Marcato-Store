@@ -139,7 +139,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "MARCATO_DBpip freeze > requirements.txt",
+        "NAME": "MARCATO_DB",
         "USER": "postgres",
         "PASSWORD": "1111",
         "HOST": "127.0.0.1",
