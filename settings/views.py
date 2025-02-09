@@ -7,7 +7,7 @@ from products.models import Product , Brand , Review
 
 # Create your views here.
 
-@cache_page(60 * 60 * 24)
+# @cache_page(60 * 60 * 24)
 def home(request):
     brands = Brand.objects.all().annotate(products_count=Count('product_name'))
     sale_products = Product.objects.filter(flag='Sale')[:15]
