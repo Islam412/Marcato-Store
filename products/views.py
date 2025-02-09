@@ -122,3 +122,6 @@ def product_filter_by_flag(request):
 
     return render(request, 'products/product_filter.html', {'products': products})
 
+
+def add_review(request):
+    pass
