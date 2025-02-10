@@ -5,6 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin # login required for c
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 
 import datetime
@@ -80,13 +82,22 @@ def checkout(request):
 
                 cart = Cart.objects.get(user=request.user,status='InProgress')
 
-                return render(request, 'orders/checkout.html',{
+                html = render_to_string('include/checkout_table.html',{
                     'cart_detail': cart_detail,
                     'sub_total': cart_total,
                     'cart_total': total,
                     'coupon': coupon_value,
                     'delivery_fee': delivery_fee,
                 })
+                return JsonResponse({'result': html})
+
+                # return render(request, 'orders/checkout.html',{
+                #     'cart_detail': cart_detail,
+                #     'sub_total': cart_total,
+                #     'cart_total': total,
+                #     'coupon': coupon_value,
+                #     'delivery_fee': delivery_fee,
+                # })
     else:
         sub_total = cart.cart_total()
         total = delivery_fee + cart.cart_total()
@@ -100,3 +111,5 @@ def checkout(request):
         'coupon': coupon,
         'delivery_fee': delivery_fee,
     })
+
+
