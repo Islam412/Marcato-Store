@@ -3,6 +3,8 @@ from django.views.generic import ListView , DetailView
 from django.db.models import Q , F , Value , Count
 from django.db.models.aggregates import Max,Min,Count,Avg,Sum
 from django.views.decorators.cache import cache_page # python raises py caching exceptions
+from django.http import JsonResponse
+from django.template.loader import render_to_string
 
 
 
@@ -136,4 +138,9 @@ def add_review(request,slug):
         user=request.user,
     )
 
-    return redirect(f'/products/{product.slug}')
+    # review
+    reviews = Review.objects.filter(product=product)
+    html = render_to_string('include/reviews_include.html',{'reviews':reviews , request:request})
+    return JsonResponse({'result': html})
+
+    # return redirect(f'/products/{product.slug}')
