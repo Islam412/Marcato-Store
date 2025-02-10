@@ -65,3 +65,14 @@ class Address(models.Model):
     type = models.CharField(max_length=20,choices=ADDRESS_TYPE)
     address = models.TextField(max_length=300)
     notes = models.TextField(null=True,blank=True)
+
+
+Phone_TYPE = [
+    ('Primary','Primary'),
+    ('Secondary','Secondary'),
+]
+
+class Phone(models.Model):
+    user = models.ForeignKey(User,related_name='user_phone',on_delete=models.CASCADE)
+    type = models.CharField(max_length=20,choices=Phone_TYPE)
+    phone = models.CharField(max_length=30)
