@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 
 import datetime
 
-from .models import Order , CartDetails , Cart
+from .models import Order , CartDetails , Cart , Coupon
 from products.models import Product
 from settings.models import DeliveryFee
 
@@ -78,10 +78,21 @@ def checkout(request):
 
                 return render(request, 'orders/checkout.html',{
                     'cart_detail': cart_detail,
-                    'cart_sub_total': cart_total,
+                    'sub_total': cart_total,
                     'cart_total': total,
                     'coupon': coupon_value,
                     'delivery_fee': delivery_fee,
                 })
-                
-    return render(request, 'orders/checkout.html',{'cart_detail':cart_detail})
+    else:
+        sub_total = cart.cart_total()
+        total = delivery_fee + cart.cart_total()
+        coupon = 0
+
+
+    return render(request, 'orders/checkout.html',{
+        'cart_detail': cart_detail,
+        'sub_total': sub_total,
+        'cart_total': total,
+        'coupon': coupon,
+        'delivery_fee': delivery_fee,
+    })
