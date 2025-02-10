@@ -224,10 +224,7 @@
                                     <h6 class="product-price">
                                         <span>${{item.price}}</span>
                                     </h6>
-                                    <button class="product-add" title="Add to Cart">
-                                        <i class="fas fa-shopping-basket"></i>
-                                        <span>add</span>
-                                    </button>
+
                                     <div class="product-action">
                                         <button class="action-minus" title="Quantity Minus"><i class="icofont-minus"></i></button>
                                         <input class="action-input" title="Quantity Number" type="text" name="quantity" value="1">
@@ -242,9 +239,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="section-btn-25">
-                            <a href="shop-4column.html" class="btn btn-outline">
+                            <a href="{% url 'products:product_list' %}" class="btn btn-outline">
                                 <i class="fas fa-eye"></i>
-                                <span>view all related</span>
+                                <span>view all products</span>
                             </a>
                         </div>
                     </div>
