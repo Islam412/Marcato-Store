@@ -5,8 +5,20 @@ services:
     ports:
       - "8000:8000"
     container_name: DjBackend
-
+    depends_on:
+      - myredis
 
   myredis:
     image: redis:7.4.2-alpine
     container_name: MyRedisServer
+    ports:
+      - "6380:6379"
+
+  celery:
+    build: .
+    command: celery -A project worker --loglevel=info
+    depends_on:
+      - myredis
+      - backend
+    volumes:
+      - .:/src

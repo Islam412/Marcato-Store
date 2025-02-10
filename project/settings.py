@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-e(7ubx*f$$p@h0hm17d86l^x3nw1w5%d1rrmh$(4kg(tmxurk^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -127,26 +127,26 @@ WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+#https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-# PostgreSQL
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "MARCATO_DB",
-        "USER": "postgres",
-        "PASSWORD": "1111",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# PostgreSQL
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "MARCATO_DB",
+#         "USER": "postgres",
+#         "PASSWORD": "1111",
+#         "HOST": "127.0.0.1",
+#         "PORT": "5432",
+#     }
+# }
 
 
 # Password validation
@@ -292,6 +292,12 @@ STORAGES = {
 # docker connet celery and redis
 # CELERY_BROKER_URL = 'redis://myredis:6379/0'
 # CELERY_RESULT_BACKEND = 'redis://myredis:6379/0'
+CELERY_BROKER_URL = 'redis://myredis:6380/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_BACKEND = 'redis://myredis:6380/0'
+
+
 
 
 # JAZZMIN settings
