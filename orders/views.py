@@ -8,6 +8,7 @@ import datetime
 
 from .models import Order , CartDetails , Cart
 from products.models import Product
+from settings.models import DeliveryFee
 
 # Create your views here.
 
@@ -50,6 +51,7 @@ def remove_from_checkout(request,id):
 def checkout(request):
     cart = Cart.objects.get(user=request.user,status='InProgress')
     cart_detail = CartDetails.objects.filter(cart=cart)
+    delivery_fee = DeliveryFee.objects.last().fee
 
     if request.method == 'POST':
         coupon = get_object_or_404(Coupon,code=request.POST['coupon_code']) # 404 with out coupon
@@ -70,12 +72,15 @@ def checkout(request):
                 cart.total_after_coupon = cart_total
                 cart.save()
 
+                total = delivery_fee + cart_total
+
                 cart = Cart.objects.get(user=request.user,status='InProgress')
 
                 return render(request, 'orders/checkout.html',{
-                    'cart_detail':cart_detail,
-                    'cart_sub_total':cart_total,
-                    'cart_total':'',
-                    'coupon':coupon_value,
+                    'cart_detail': cart_detail,
+                    'cart_sub_total': cart_total,
+                    'cart_total': total,
+                    'coupon': coupon_value,
                 })
+                
     return render(request, 'orders/checkout.html',{'cart_detail':cart_detail})
