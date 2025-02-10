@@ -81,6 +81,7 @@ def checkout(request):
                     'cart_sub_total': cart_total,
                     'cart_total': total,
                     'coupon': coupon_value,
+                    'delivery_fee': delivery_fee,
                 })
                 
     return render(request, 'orders/checkout.html',{'cart_detail':cart_detail})
