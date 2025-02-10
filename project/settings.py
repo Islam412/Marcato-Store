@@ -137,28 +137,28 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # }
 
 # PostgreSQL
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "MARCATO_DB",
-#         "USER": "postgres",
-#         "PASSWORD": "1111",
-#         "HOST": "127.0.0.1",
-#         "PORT": "5432",
-#     }
-# }
-
-
 DATABASES = {
-    'default' : {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DATABASE_NAME', 'MARCATO_DB'),
-        'USER': os.getenv('DATABASE_USER', 'postgres'),
-        'PASSWORD': os.getenv('DATABASE_PASSWORD', '1111'),
-        'HOST': os.getenv('DATABASE_HOST', 'db'),
-        'PORT': os.getenv('DATABASE_PORT', '5432'),  # غيّر من 5433 إلى 5432
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "MARCATO_DB",
+        "USER": "postgres",
+        "PASSWORD": "1111",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
+
+# db with docker
+# DATABASES = {
+#     'default' : {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.getenv('DATABASE_NAME', 'MARCATO_DB'),
+#         'USER': os.getenv('DATABASE_USER', 'postgres'),
+#         'PASSWORD': os.getenv('DATABASE_PASSWORD', '1111'),
+#         'HOST': os.getenv('DATABASE_HOST', 'db'),
+#         'PORT': os.getenv('DATABASE_PORT', '5432'),  # غيّر من 5433 إلى 5432
+#     }
+# }
 
 
 
@@ -203,7 +203,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL='media/'
-MEDIA_ROOT=BASE_DIR / "media/"
+MEDIA_ROOT=BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -305,10 +305,11 @@ STORAGES = {
 # docker connet celery and redis
 # CELERY_BROKER_URL = 'redis://myredis:6379/0'
 # CELERY_RESULT_BACKEND = 'redis://myredis:6379/0'
-CELERY_BROKER_URL = 'redis://myredis:6379/0'
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_BACKEND = 'redis://myredis:6380/0'
+
+# CELERY_BROKER_URL = 'redis://myredis:6379/0'
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_BACKEND = 'redis://myredis:6380/0'
 
 
 
