@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rosetta',
+    'drf_yasg'
 ]
 
 MIDDLEWARE = [
