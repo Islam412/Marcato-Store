@@ -48,3 +48,20 @@ def save_user_profile(sender, instance, **kwargs):
 
 post_save.connect(create_user_profile ,sender=User)
 post_save.connect(save_user_profile ,sender=User)
+
+
+
+ADDRESS_TYPE = [
+    ('Home', 'Home'),
+    ('Work', 'Work'),
+    ('Bussinees','Bussinees'),
+    ('Office','Office'),
+    ('Academy','Academy'),
+    ('Other','Other'),
+]
+
+class Address(models.Model):
+    user = models.ForeignKey(User,related_name='user_address',on_delete=models.CASCADE)
+    type = models.CharField(max_length=20,choices=ADDRESS_TYPE)
+    address = models.TextField(max_length=300)
+    notes = models.TextField(null=True,blank=True)
