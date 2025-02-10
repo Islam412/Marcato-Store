@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
-
+from utils.generate_code import generate_code
 
 # Create your models here.
 
@@ -29,6 +29,7 @@ class Profile(models.Model):
     cover_images = models.ImageField(_('Cover Image'),upload_to='Images_Profile', null=True, blank=True, default='user.png')
     phone = models.CharField(_('Phone'),max_length=200, null=True ,blank=True)
     address = models.CharField(_('Address'),max_length=200 ,null=True ,blank=True)
+    code = models.CharField(max_length=10 ,default=generate_code)
     verified = models.BooleanField(_('Verified'),default=False)
 
     
