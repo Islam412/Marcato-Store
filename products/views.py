@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from django.views.generic import ListView , DetailView
 from django.db.models import Q , F , Value , Count
 from django.db.models.aggregates import Max,Min,Count,Avg,Sum
@@ -123,5 +123,17 @@ def product_filter_by_flag(request):
     return render(request, 'products/product_filter.html', {'products': products})
 
 
-def add_review(request):
-    pass
+def add_review(request,slug):
+    product = Product.objects.get(slug=slug)
+
+    rate = request.POST['rate']  # rate = request.POST.get('rate') , request.GET['rate'] = request.POST.get('rate)
+    review = request.POST['review']
+
+    Review.objects.create(
+        product=product,
+        rate=rate,
+        review=review,
+        user=request.user,
+    )
+
+    return redirect(f'/products/{product.slug}')
