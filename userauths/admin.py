@@ -1,5 +1,5 @@
 from django.contrib import admin
-from userauths.models import User, Profile
+from userauths.models import User, Profile , Address , Phone
 
 class UserCustomAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'email']
@@ -22,3 +22,5 @@ class ProfileAdmin(admin.ModelAdmin):
 
 admin.site.register(User, UserCustomAdmin)
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Address)
+admin.site.register(Phone)

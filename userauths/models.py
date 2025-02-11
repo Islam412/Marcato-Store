@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save  # create profile before creat user
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 
@@ -27,12 +27,28 @@ class User(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     cover_images = models.ImageField(_('Cover Image'),upload_to='Images_Profile', null=True, blank=True, default='user.png')
-    phone = models.CharField(_('Phone'),max_length=200, null=True ,blank=True)
-    address = models.CharField(_('Address'),max_length=200 ,null=True ,blank=True)
+    address = models.OneToOneField('Address', null=True, blank=True, on_delete=models.SET_NULL)
+    phone = models.OneToOneField('Phone', null=True, blank=True, on_delete=models.SET_NULL)
     code = models.CharField(max_length=10 ,default=generate_code)
     verified = models.BooleanField(_('Verified'),default=False)
 
+    @property
+    def first_name(self):
+        return self.user.first_name
     
+    @property
+    def last_name(self):
+        return self.user.last_name
+
+    @property
+    def username(self):
+        return self.user.username
+    
+    @property
+    def email(self):
+        return self.user.email
+    
+
     def __str__(self):
         return self.user.username if self.user and self.user.username else 'Unnamed Profile'
     
