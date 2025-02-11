@@ -20,7 +20,7 @@ from userauths.serializers import UserSerializer , ProfileSerializer
 
 
 class RegisterView(FormView):
-    template_name = 'userauths/sign-up.html'
+    template_name = 'userauths/register.html'
     form_class = UserRegisterForm
     success_url = reverse_lazy('settings:home')
 
@@ -82,7 +82,7 @@ class LogoutView(LoginRequiredMixin, TemplateView):
     def get(self, request, *args, **kwargs):
         logout(request)
         messages.success(request, 'You have been logged out')
-        return redirect("userauths:sign-up")
+        return redirect("userauths:sign-in")
     
 
 # @login_required
