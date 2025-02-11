@@ -16,7 +16,7 @@
                 <div class="row justify-content-center">
                     <div class="col-12 col-sm-10 col-md-12 col-lg-12 col-xl-10">
                         <div class="user-form-logo">
-                            <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+                            <a href="/"><img src="{{ company_data.logo.url }}" alt="logo"></a>
                         </div>
                         <div class="user-form-card">
                             <div class="user-form-title">
@@ -58,7 +58,7 @@
                             <p>Already Have An Account?<a href="{% url 'userauths:sign-in' %}">login here</a></p>
                         </div>
                         <div class="user-form-footer">
-                            <p>Greeny | &COPY; Copyright by <a href="#">Mironcoder</a></p>
+                            <p>{{ company_data.name }} | &COPY; Copyright by <a href="https://github.com/Islam412">Islam Hamdy</a></p>
                         </div>
                     </div>
                 </div>
