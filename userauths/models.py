@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db.models.signals import post_save  # create profile before creat user
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 from utils.generate_code import generate_code
 
@@ -83,13 +84,26 @@ class Address(models.Model):
     address = models.TextField(max_length=300)
     notes = models.TextField(null=True,blank=True)
 
+    def __str__(self):
+        return f"{self.type} - {self.address}"
+
 
 Phone_TYPE = [
     ('Primary','Primary'),
     ('Secondary','Secondary'),
 ]
 
+
 class Phone(models.Model):
-    user = models.ForeignKey(User,related_name='user_phone',on_delete=models.CASCADE)
-    type = models.CharField(max_length=20,choices=Phone_TYPE)
+    user = models.ForeignKey(User, related_name='user_phone', on_delete=models.CASCADE)
+    type = models.CharField(max_length=20, choices=Phone_TYPE)
     phone = models.CharField(max_length=30)
+
+    def clean(self):
+        if not self.phone.isdigit():
+            raise ValidationError("Phone number must be numeric.")
+
+    def __str__(self):
+        return f"{self.type} - {self.phone}"
+
+
