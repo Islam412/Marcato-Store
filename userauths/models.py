@@ -32,23 +32,19 @@ class Profile(models.Model):
     phone = models.OneToOneField('Phone', null=True, blank=True, on_delete=models.SET_NULL)
     code = models.CharField(max_length=10 ,default=generate_code)
     verified = models.BooleanField(_('Verified'),default=False)
+    
 
     @property
-    def first_name(self):
-        return self.user.first_name
-    
+    def full_name(self):
+        return f"{self.user.first_name} {self.user.last_name}" if self.user.first_name and self.user.last_name else self.user.username
+
     @property
-    def last_name(self):
-        return self.user.last_name
+    def email(self):
+        return self.user.email
 
     @property
     def username(self):
         return self.user.username
-    
-    @property
-    def email(self):
-        return self.user.email
-    
 
     def __str__(self):
         return self.user.username if self.user and self.user.username else 'Unnamed Profile'
