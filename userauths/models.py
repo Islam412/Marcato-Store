@@ -27,12 +27,11 @@ class User(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    cover_images = models.ImageField(_('Cover Image'),upload_to='Images_Profile', null=True, blank=True, default='user.png')
+    cover_images = models.ImageField(_('Cover Image'), upload_to='Images_Profile', null=True, blank=True, default='user.png')
     address = models.OneToOneField('Address', null=True, blank=True, on_delete=models.SET_NULL)
     phone = models.OneToOneField('Phone', null=True, blank=True, on_delete=models.SET_NULL)
-    code = models.CharField(max_length=10 ,default=generate_code)
-    verified = models.BooleanField(_('Verified'),default=False)
-    
+    code = models.CharField(max_length=10, default=generate_code)
+    verified = models.BooleanField(_('Verified'), default=False)
 
     @property
     def full_name(self):
@@ -46,9 +45,18 @@ class Profile(models.Model):
     def username(self):
         return self.user.username
 
+    @property
+    def address_info(self):
+        return self.address.address if self.address else "No address provided"
+
+    @property
+    def phone_info(self):
+        return self.phone.phone if self.phone else "No phone number provided"
+
     def __str__(self):
         return self.user.username if self.user and self.user.username else 'Unnamed Profile'
-    
+
+
 @receiver(post_save, sender=User)
 # create user profile automatic
 def create_user_profile(sender, instance, created, **kwargs):
@@ -62,6 +70,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 post_save.connect(create_user_profile ,sender=User)
 post_save.connect(save_user_profile ,sender=User)
+
 
 
 
@@ -103,3 +112,14 @@ class Phone(models.Model):
         return f"{self.type} - {self.phone}"
 
 
+@receiver(post_save, sender=Address)
+def create_or_update_profile_with_address(sender, instance, created, **kwargs):
+    if instance.user.profile:
+        instance.user.profile.address = instance
+        instance.user.profile.save()
+
+@receiver(post_save, sender=Phone)
+def create_or_update_profile_with_phone(sender, instance, created, **kwargs):
+    if instance.user.profile:
+        instance.user.profile.phone = instance
+        instance.user.profile.save()
