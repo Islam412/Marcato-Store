@@ -95,6 +95,12 @@ class ProfileView(DetailView):
         return get_object_or_404(Profile, user=self.request.user)
     
 
+# return data off phoens and adsress
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['phones'] = self.get_object().user.user_phone.all()
+        return context
+
 
 # @login_required
 class ProfileUpdateView(UpdateView):
