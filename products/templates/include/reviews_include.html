@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <h3 class="frame-title">Reviews({{ reviews.count }})</h3>
 <ul class="review-list">
     
@@ -5,7 +8,11 @@
         <li class="review-item">
             <div class="review-media">
                 <a class="review-avatar" href="#">
-                    <img src="{{ review.user.profile.cover_images.url }}" style="width: 65px; height: 64.52px;" alt="review">
+                    {% if review.user.profile.cover_images.url %}
+                        <img src="{{ review.user.profile.cover_images.url }}" style="width: 65px; height: 64.52px;" alt="review">
+                    {% else %}
+                        <a href="#"><img src="{% static 'en/images/user.png' %}" alt="user"></a>
+                    {% endif %}
                 </a>
                 <h5 class="review-meta">
                     <a href="#">{{review.user}}</a>
@@ -24,6 +31,5 @@
         </li>
         <br>
     {% endfor %}
-
 
 </ul>

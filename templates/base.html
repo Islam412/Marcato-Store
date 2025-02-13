@@ -139,7 +139,7 @@
                         {% if user.is_authenticated %}
                             <img class="header-user" src="{{ user.profile.cover_images.url }}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;"">
                         {% else %}
-                            <img class="header-user" src="{% static 'images/user.png' %}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;">
+                            <img class="header-user" src="{% static 'en/images/user.png' %}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;">
                         {% endif %}
 
                         <a href="index.html"><img src="{{ company_data.logo.url }}" alt="logo"></a>
@@ -156,7 +156,7 @@
 
                                 <img class="header-user" src="{{ user.profile.cover_images.url }}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;"">
                             {% else %}
-                                <img class="header-user" src="{% static 'images/user.png' %}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;">
+                                <img class="header-user" src="{% static 'en/images/user.png' %}" alt="user" style="border-radius: 50%; width: 50px; height: 50px;">
                             {% endif %}
                         </button>
                         <ul class="dropdown-position-list navbar-link">
@@ -486,7 +486,7 @@
 
                 <!-- This commentable code show when user login or register -->
                 <!-- <div class="nav-profile">
-                    <a class="nav-user" href="#"><img src="{% static 'images/user.png' %}" alt="user"></a>
+                    <a class="nav-user" href="#"><img src="{% static 'en/images/user.png' %}" alt="user"></a>
                     <h4 class="nav-name"><a href="profile.html">Miron Mahmud</a></h4>
                 </div> -->
                 <div class="nav-select-group">
@@ -522,7 +522,7 @@
                         <a class="nav-link" href="{% url 'orders:order_list' %}">{% translate "Order" %}</a>
                     </li>
 
-                    <li><a class="nav-link" href="{% url 'orders:coupon' %}"><i class="icofont-sale-discount"></i>{% translate "offers" %}</a></li>
+                    <li><a class="nav-link" href="{% url 'orders:coupon' %}">{% translate "offers" %}</a></li>
                     <li><a class="nav-link" href="{% url 'settings:faq' %}">{% translate "need help" %}</a></li>
                     <li><a class="nav-link" href="{% url 'settings:contact' %}">{% translate "contact us" %}</a></li>
                     <li><a class="nav-link" href="{% url 'userauths:sign-out' %}">{% translate "logout" %}</a></li>
