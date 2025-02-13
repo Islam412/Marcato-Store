@@ -150,16 +150,16 @@ def process_payment(request):
     checkout_session = stripe.checkout.Session.create(
         line_items=items,
         mode='payment',
-        success_url="https://127.0.0.1:8000/orders/checkout/payment/success",  # استخدام HTTPS هنا
-        cancel_url="https://127.0.0.1:8000/orders/checkout/payment/failed",  # استخدام HTTPS هنا
+        success_url="http://127.0.0.1:8000/orders/checkout/payment/success",  # استخدام HTTPS هنا
+        cancel_url="http://127.0.0.1:8000/orders/checkout/payment/failed",  # استخدام HTTPS هنا
     )
 
     return JsonResponse({'session': checkout_session})
 
 
 def payment_success(request):
-    return redirect('orders/success.html')
+    return render(request,'orders/success.html')
 
 
 def payment_failed(request):
-    return redirect('orders/failed.html')
+    return render(request,'orders/failed.html')

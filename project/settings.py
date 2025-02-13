@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'rosetta',
     'drf_yasg',
     "bootstrap5",
+    'sslserver',
 ]
 
 MIDDLEWARE = [
@@ -327,7 +328,7 @@ STORAGES = {
 JAZZMIN_SETTINGS = {
     'site_header': "Marcato store",
     'site_brand': "Marcato store...",
-    'site_logo': "assets/img/marcato.png",
+    'site_logo': "en/assets/img/marcato.png",
     'copyright':  "All Right Reserved 2024",
     "welcome_sign": "Welcome to Marcato store Admin, Login Now.",
     "topmenu_links": [
