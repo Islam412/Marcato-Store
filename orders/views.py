@@ -7,14 +7,17 @@ from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from django.http import JsonResponse
 from django.template.loader import render_to_string
+from django.conf import settings
 
 
 import datetime
+import stripe
 
 
 from .models import Order , CartDetails , Cart , Coupon
 from products.models import Product
 from settings.models import DeliveryFee
+from utils.generate_code import generate_code
 
 # Create your views here.
 
@@ -58,6 +61,7 @@ def checkout(request):
     cart = Cart.objects.get(user=request.user,status='InProgress')
     cart_detail = CartDetails.objects.filter(cart=cart)
     delivery_fee = DeliveryFee.objects.last().fee
+    pub_key = settings.STRIPE_API_KEY_PUBLISHABLE
 
     if request.method == 'POST':
         coupon = get_object_or_404(Coupon,code=request.POST['coupon_code']) # 404 with out coupon
@@ -88,6 +92,7 @@ def checkout(request):
                     'cart_total': total,
                     'coupon': coupon_value,
                     'delivery_fee': delivery_fee,
+                    'pub_key':pub_key,
                 })
                 return JsonResponse({'result': html})
 
@@ -110,6 +115,51 @@ def checkout(request):
         'cart_total': total,
         'coupon': coupon,
         'delivery_fee': delivery_fee,
+        'pub_key':pub_key,
     })
 
 
+def process_payment(request):
+    cart = Cart.objects.get(user=request.user, status='InProgress')
+    cart_detail = CartDetails.objects.filter(cart=cart)
+    delivery_fee = DeliveryFee.objects.last().fee
+
+    if cart.total_after_coupon:
+        total = cart.total_after_coupon + delivery_fee
+    else:
+        total = cart.cart_total() + delivery_fee
+
+    code = generate_code()
+
+    stripe.api_key = settings.STRIPE_API_KEY_SECRET
+
+
+    items = [
+        {
+            'price_data': {
+                'currency': 'usd',
+                'product_data': {
+                    'name': code,
+                },
+                'unit_amount': int(total * 100),
+            },
+            'quantity': 1,
+        }
+    ]
+
+    checkout_session = stripe.checkout.Session.create(
+        line_items=items,
+        mode='payment',
+        success_url="https://127.0.0.1:8000/orders/checkout/payment/success",  # استخدام HTTPS هنا
+        cancel_url="https://127.0.0.1:8000/orders/checkout/payment/failed",  # استخدام HTTPS هنا
+    )
+
+    return JsonResponse({'session': checkout_session})
+
+
+def payment_success(request):
+    return redirect('orders/success.html')
+
+
+def payment_failed(request):
+    return redirect('orders/failed.html')

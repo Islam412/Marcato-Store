@@ -346,7 +346,7 @@
                                 <label for="checkout-check">By making this purchase you agree to our <a href="#">Terms and Conditions</a>.</label>
                             </div>
                             <div class="checkout-proced">
-                                <a href="invoice.html" class="btn btn-inline">proced to checkout</a>
+                                <button onclick="buy(event)" class="btn btn-inline">Proceed to Checkout</button>
                             </div>
                         </div>
                     </div>
@@ -501,11 +501,51 @@
         <!--=====================================
                     MODAL EDIT FORM END
         =======================================-->
+
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
-
-
+        <script src="https://js.stripe.com/v3/"></script>
+        
         <script>
+
+            function buy(event) {
+                event.preventDefault();
+                
+                var stripe = Stripe('{{ pub_key }}');
+        
+                fetch('/orders/checkout/payment/', {
+                    method: 'POST',
+                    headers: {
+                        'x-CSRFToken': '{{ csrf_token }}',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(function(session) {
+                    if (!session || !session.session || !session.session.id) {
+                        throw new Error('Invalid session data');
+                    }
+                    return stripe.redirectToCheckout({ sessionId: session.session.id });
+                })
+                .then(function(result) {
+                    if (result.error) {
+                        alert(result.error.message);
+                    }
+                })
+                .catch(function(error) {
+                    console.error("Error:", error);
+                    alert('حدث خطأ أثناء معالجة الدفع. يرجى المحاولة مرة أخرى.');
+                });
+            }
+        
+
+
+
             $(document).ready(function(e){
 
                 $(document).on('submit','#applyCoupon',function(e){
@@ -529,3 +569,23 @@
         </script>
 
 {% endblock boody %}
+
+
+            <!-- $(document).ready(function() {
+                $(document).on('submit', '#applyCoupon', function(e) {
+                    e.preventDefault();
+        
+                    $.ajax({
+                        type: $(this).attr('method'),
+                        url: $(this).attr('action'),
+                        data: $(this).serialize(),
+                        dataType: 'json',
+                        success: function(response) {
+                            $('#checkoutTable').html(response['result']);
+                        },
+                        error: function() {
+                            console.error("Error applying coupon");
+                        }
+                    });
+                });
+            }); -->
