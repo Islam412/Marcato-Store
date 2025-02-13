@@ -522,7 +522,7 @@
                         <a class="nav-link" href="{% url 'orders:order_list' %}">{% translate "Order" %}</a>
                     </li>
 
-                    <li><a class="nav-link" href="offer.html"><i class="icofont-sale-discount"></i>{% translate "offers" %}</a></li>
+                    <li><a class="nav-link" href="{% url 'orders:coupon' %}"><i class="icofont-sale-discount"></i>{% translate "offers" %}</a></li>
                     <li><a class="nav-link" href="{% url 'settings:faq' %}">{% translate "need help" %}</a></li>
                     <li><a class="nav-link" href="{% url 'settings:contact' %}">{% translate "contact us" %}</a></li>
                     <li><a class="nav-link" href="{% url 'userauths:sign-out' %}">{% translate "logout" %}</a></li>
@@ -705,7 +705,7 @@
                                     <li><a href="{% url 'userauths:profile' %}">{% translate "My Account" %}</a></li>
                                     <li><a href="{% url 'settings:contact' %}">{% translate "Contact" %}</a></li>
                                     <li><a href="{% url 'settings:faq' %}">{% translate "Need Help" %}</a></li>
-                                    <li><a href="#">{% translate "Offer" %}</a></li>
+                                    <li><a href="{% url 'orders:coupon' %}">{% translate "Offer" %}</a></li>
                                 </ul>
                             </div>
                         </div>
