@@ -18,7 +18,7 @@
             <div class="container">
                 <h2>my profile</h2>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">profile</li>
                 </ol>
             </div>
@@ -44,19 +44,29 @@
                                 <div class="row">
                                     <div class="col-lg-2">
                                         <div class="profile-image">
-                                            <a href="#"><img src="{% static 'images/user.png' %}" alt="user"></a>
+                                            {% if user.profile.cover_images.url %}
+                                                <a href="#"><img src="{{ user.profile.cover_images.url }}" alt="user"></a>
+                                            {% else %}
+                                                <a href="#"><img src="{% static 'en/images/user.png' %}" alt="user"></a>
+                                            {% endif %}
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label">name</label>
-                                            <input class="form-control" type="text" value="Miron Mahmud">
+                                            <h3 class="form-control" style="padding-top: 10px;">{{ user.first_name }} {{ user.last_name }}</h3>
                                         </div>
                                     </div>
+                                    <!-- <div class="col-md-6 col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-label">username</label>
+                                            <h3 class="form-control" style="padding-top: 10px;">{{ user.username }}</h3>
+                                        </div>
+                                    </div> -->
                                     <div class="col-md-6 col-lg-4">
                                         <div class="form-group">
                                             <label class="form-label">Email</label>
-                                            <input class="form-control" type="email" value="mironcoder@gmail.com">
+                                            <h3 class="form-control" style="padding-top: 10px;">{{ user.email }}</h3>
                                         </div>
                                     </div>
                                     <div class="col-lg-2">
