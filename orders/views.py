@@ -166,4 +166,8 @@ def payment_failed(request):
 
 
 def coupon(request):
-    return render(request,'orders/coupon.html')
+    coupon = Coupon.objects.all()
+    context={
+        'coupon': coupon,
+    }
+    return render(request,'orders/coupon.html',context)
