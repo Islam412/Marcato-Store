@@ -163,3 +163,7 @@ def payment_success(request):
 
 def payment_failed(request):
     return render(request,'orders/failed.html')
+
+
+def coupon(request):
+    return render(request,'orders/coupon.html')
