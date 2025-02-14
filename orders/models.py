@@ -104,19 +104,12 @@ class Delivery(models.Model):
     express = models.CharField(_('Express'),max_length=200, blank=True,null=True)
     start_work = models.DateTimeField(_('Start Work'),null=True,blank=True)
     end_work = models.DateTimeField(_('End Work'),null=True,blank=True)
-    address = models.ForeignKey('DeliveryAddress', related_name='delivery_address',on_delete=models.CASCADE)
-    phone = models.ForeignKey('DeliveryPhone', related_name='delivery_phoens',on_delete=models.CASCADE)
+    # address = models.ForeignKey('DeliveryAddress', related_name='delivery_address',on_delete=models.CASCADE)
+    # phone = models.ForeignKey('DeliveryPhone', related_name='delivery_phoens',on_delete=models.CASCADE)
 
-    @property
-    def address_info(self):
-        return self.address.address if self.address else "No address provided"
-
-    @property
-    def phone_info(self):
-        return self.phone.phone if self.phone else "No phone number provided"
 
     def __str__(self):
-        return f"{self.user} - {self.express if self.express else 'No express'} - {self.address_info}"
+        return f"{self.user}"
 
 
 ADDRESS_TYPE = [
@@ -150,13 +143,8 @@ class DeliveryPhone(models.Model):
     type = models.CharField(_('Type'),max_length=20, choices=Phone_TYPE)
     phone = models.CharField(_('Notes'),max_length=30)
 
-    def clean(self):
-        if not self.phone.isdigit():
-            raise ValidationError("Phone number must be numeric.")
-
     def __str__(self):
         return f"{self.type} - {self.phone}"
-
 
 class CreditCard(models.Model):
     user = models.ForeignKey(User, related_name='credit_cards', on_delete=models.CASCADE)

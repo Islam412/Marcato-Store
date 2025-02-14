@@ -1,0 +1,28 @@
+from .models import Profile, Phone
+
+def get_profile_data(request):
+    profile_data = Profile.objects.filter(user=request.user).first()
+    if profile_data:
+        # جلب كل الأرقام المرتبطة بالمستخدم
+        phone_numbers = Phone.objects.filter(user=request.user)
+        
+        # تصنيف الأرقام حسب النوع
+        primary_phone = phone_numbers.filter(type='Primary').first()
+        secondary_phone = phone_numbers.filter(type='Secondary').first()
+        third_phone = phone_numbers.filter(type='Third').first()
+
+        context = {
+            'profile_data': profile_data,
+            'primary_phone': primary_phone.phone if primary_phone else "No Primary Phone",
+            'secondary_phone': secondary_phone.phone if secondary_phone else "No Secondary Phone",
+            'third_phone': third_phone.phone if third_phone else "No Third Phone",
+        }
+    else:
+        context = {
+            'profile_data': None,
+            'primary_phone': "No Primary Phone",
+            'secondary_phone': "No Secondary Phone",
+            'third_phone': "No Third Phone",
+        }
+
+    return context

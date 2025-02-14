@@ -16,11 +16,12 @@ import datetime
 import stripe
 
 
-from .models import Order , CartDetails , Cart , Coupon , DeliveryPhone , DeliveryPhone , CreditCard
+from .models import Order , CartDetails , Cart , Coupon , DeliveryPhone , DeliveryAddress , CreditCard 
 from products.models import Product
 from settings.models import DeliveryFee
 from utils.generate_code import generate_code
 from userauths.models import Profile
+# from .forms import DeliverForm
 
 # Create your views here.
 
@@ -176,23 +177,14 @@ def coupon(request):
     return render(request,'orders/coupon.html',context)
 
 
-class Delivery(DetailView):
-    model = Profile
-    template_name = 'orders/checkout.html'
-    context_object_name = 'profile'
 
-    def get_object(self, queryset=None):
-        return get_object_or_404(Profile, user=self.request.user)
-        
-    def get_object(self, queryset=None):
-        return get_object_or_404(Profile, user=self.request.user)
-    
+# def delivery_view(request):
+#     user = request.user
+#     phones = DeliveryPhone.objects.filter(user=user)
 
-# return data off phoens and adsress and credit cards
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['phones'] = self.get_object().user.user_phone.all()
-        context['address'] = self.get_object().user.user_address.all()
-        context['credit'] = self.get_object().user.user_credit_cards.all() # user_credit_cards ----->the name off lien at db
-        return context
+#     context = {
+#         'phones': phones,
+#     }
+#     return render(request, 'orders/checkout.html', context)
+
 

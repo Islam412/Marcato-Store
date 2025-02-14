@@ -3,10 +3,7 @@ from .models import Cart,CartDetails,Order,OrderDetails,Coupon,DeliveryAddress,D
 
 # Register your models here.
 
-class DeliveryAdmin(admin.ModelAdmin):
-    list_display = ['user','address' , 'phone']
-    search_fields = ['user__username', 'phone', 'address']
-    ordering = ['user']
+
 
 
 
@@ -18,4 +15,4 @@ admin.site.register(Coupon)
 admin.site.register(DeliveryAddress)
 admin.site.register(DeliveryPhone)
 admin.site.register(CreditCard)
-admin.site.register(Delivery,DeliveryAdmin)
+admin.site.register(Delivery)

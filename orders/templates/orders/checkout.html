@@ -12,7 +12,7 @@
         <!--=====================================
                     BANNER PART START
         =======================================-->
-        <section class="inner-section single-banner" style="background: url(images/single-banner.jpg) no-repeat center;">
+        <section class="inner-section single-banner" style="background: url( {% static 'en/images/single-banner.jpg' %} ) no-repeat center;">
             <div class="container">
                 <h2>checkout</h2>
                 <ol class="breadcrumb">
@@ -213,22 +213,51 @@
                             </div>
                             <div class="account-content">
                                 <div class="row">
-                                    {% for phone in phones %}
-                                        <div class="col-md-6 col-lg-4 alert fade show">
-                                            <div class="profile-card contact">
-                                                <h6>{{ phone.type }}</h6>
-                                                <p>{{ phone.phone }}</p>
-                                                <ul>
-                                                    <li>
-                                                        <button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#contact-edit"></button>
-                                                    </li>
-                                                    <li>
-                                                        <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card contact">
+                                            <h6>Primary Phone</h6>
+                                            <p>{{ primary_phone }}</p>
+                                            <ul>
+                                                <li>
+                                                    <button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#contact-edit"></button>
+                                                </li>
+                                                <li>
+                                                    <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    {% endfor %}
+                                    </div>
+                                    
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card contact">
+                                            <h6>Secondary Phone</h6>
+                                            <p>{{ secondary_phone }}</p>
+                                            <ul>
+                                                <li>
+                                                    <button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#contact-edit"></button>
+                                                </li>
+                                                <li>
+                                                    <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card contact">
+                                            <h6>Third Phone</h6>
+                                            <p>{{ third_phone }}</p>
+                                            <ul>
+                                                <li>
+                                                    <button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#contact-edit"></button>
+                                                </li>
+                                                <li>
+                                                    <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
