@@ -1,4 +1,4 @@
-from .models import Profile, Phone
+from .models import Profile, Phone, Address, ADDRESS_TYPE
 
 def get_profile_data(request):
     profile_data = Profile.objects.filter(user=request.user).first()
@@ -11,11 +11,16 @@ def get_profile_data(request):
         secondary_phone = phone_numbers.filter(type='Secondary').first()
         third_phone = phone_numbers.filter(type='Third').first()
 
+        # Retrieve all addresses associated with the user
+        addresses = Address.objects.filter(user=request.user)
+
         context = {
             'profile_data': profile_data,
             'primary_phone': primary_phone.phone if primary_phone else "No Primary Phone",
             'secondary_phone': secondary_phone.phone if secondary_phone else "No Secondary Phone",
             'third_phone': third_phone.phone if third_phone else "No Third Phone",
+            'addresses': addresses,  # Include all user addresses
+            'address_types': ADDRESS_TYPE,  # Include all address types as tuples
         }
     else:
         context = {
@@ -23,6 +28,8 @@ def get_profile_data(request):
             'primary_phone': "No Primary Phone",
             'secondary_phone': "No Secondary Phone",
             'third_phone': "No Third Phone",
+            'addresses': [],
+            'address_types': ADDRESS_TYPE,  # Return address types even if no profile data exists
         }
 
     return context
