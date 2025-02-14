@@ -97,3 +97,22 @@ class Coupon(models.Model):
        week = datetime.timedelta(days=7)
        self.end_date = self.start_date + week
        super(Coupon, self).save(*args, **kwargs)  # call the real save method
+
+
+ADDRESS_TYPE = [
+    ('Home', 'Home'),
+    ('Work', 'Work'),
+    ('Bussinees','Bussinees'),
+    ('Office','Office'),
+    ('Academy','Academy'),
+    ('Other','Other'),
+]
+
+class deliveryAddress(models.Model):
+    user = models.ForeignKey(User,related_name='delivery_address',on_delete=models.CASCADE)
+    type = models.CharField(_('Type'),max_length=20,choices=ADDRESS_TYPE)
+    address = models.TextField(_('address'),max_length=300)
+    notes = models.TextField(_('Notes'),null=True,blank=True)
+
+    def __str__(self):
+        return f"{self.type} - {self.address}"

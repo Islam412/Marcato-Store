@@ -85,9 +85,9 @@ ADDRESS_TYPE = [
 
 class Address(models.Model):
     user = models.ForeignKey(User,related_name='user_address',on_delete=models.CASCADE)
-    type = models.CharField(max_length=20,choices=ADDRESS_TYPE)
-    address = models.TextField(max_length=300)
-    notes = models.TextField(null=True,blank=True)
+    type = models.CharField(_('Type'),max_length=20,choices=ADDRESS_TYPE)
+    address = models.TextField(_('address'),max_length=300)
+    notes = models.TextField(_('Notes'),null=True,blank=True)
 
     def __str__(self):
         return f"{self.type} - {self.address}"
@@ -102,8 +102,8 @@ Phone_TYPE = [
 
 class Phone(models.Model):
     user = models.ForeignKey(User, related_name='user_phone', on_delete=models.CASCADE)
-    type = models.CharField(max_length=20, choices=Phone_TYPE)
-    phone = models.CharField(max_length=30)
+    type = models.CharField(_('Notes'),max_length=20, choices=Phone_TYPE)
+    phone = models.CharField(_('Notes'),max_length=30)
 
     def clean(self):
         if not self.phone.isdigit():
