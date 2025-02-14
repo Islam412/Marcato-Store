@@ -111,7 +111,7 @@ ADDRESS_TYPE = [
 class DeliveryAddress(models.Model):
     user = models.ForeignKey(User,related_name='delivery_address',on_delete=models.CASCADE)
     type = models.CharField(_('Type'),max_length=20,choices=ADDRESS_TYPE)
-    address = models.TextField(_('address'),max_length=300)
+    address = models.TextField(_('Address'),max_length=300)
     notes = models.TextField(_('Notes'),null=True,blank=True)
 
     def __str__(self):
@@ -127,7 +127,7 @@ Phone_TYPE = [
 
 class DeliveryPhone(models.Model):
     user = models.ForeignKey(User, related_name='delivery_phone', on_delete=models.CASCADE)
-    type = models.CharField(_('Notes'),max_length=20, choices=Phone_TYPE)
+    type = models.CharField(_('Type'),max_length=20, choices=Phone_TYPE)
     phone = models.CharField(_('Notes'),max_length=30)
 
     def clean(self):
@@ -136,3 +136,16 @@ class DeliveryPhone(models.Model):
 
     def __str__(self):
         return f"{self.type} - {self.phone}"
+
+
+class CreditCard(models.Model):
+    user = models.ForeignKey(User, related_name='credit_cards', on_delete=models.CASCADE)
+    image = models.ImageField(_('Image'), upload_to='Images_credit', null=True, blank=True, default='credit.webp')
+    name = models.CharField(_('Name'),max_length=225)
+    card_number = models.CharField(_('Card Number'),max_length=16)
+    country = models.CharField(_('Country'),max_length=225)
+    cvv = models.CharField(_('CVV'),max_length=3)
+    expiration_date = models.DateField(_('Expiration Date'),)
+
+    def __str__(self):
+        return f"Card ending in {self.card_number[-4:]} - {self.user.username}"
