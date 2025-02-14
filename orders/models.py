@@ -108,7 +108,7 @@ ADDRESS_TYPE = [
     ('Other','Other'),
 ]
 
-class deliveryAddress(models.Model):
+class DeliveryAddress(models.Model):
     user = models.ForeignKey(User,related_name='delivery_address',on_delete=models.CASCADE)
     type = models.CharField(_('Type'),max_length=20,choices=ADDRESS_TYPE)
     address = models.TextField(_('address'),max_length=300)
