@@ -21,6 +21,7 @@ django-heroku-connect==0.13.0
 django-heroku-postgresify==0.1
 django-jazzmin==3.0.1
 django-rosetta==0.10.1
+django-sslserver==0.22
 django-taggit==6.1.0
 djangorestframework==3.15.2
 djangorestframework-simplejwt==5.3.1
