@@ -96,6 +96,7 @@ class Address(models.Model):
 Phone_TYPE = [
     ('Primary','Primary'),
     ('Secondary','Secondary'),
+    ('Third','Third')
 ]
 
 

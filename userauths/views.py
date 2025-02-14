@@ -99,7 +99,10 @@ class ProfileView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['phones'] = self.get_object().user.user_phone.all()
+        context['address'] = self.get_object().user.user_address.all()
         return context
+
+
 
 
 # @login_required
