@@ -99,6 +99,26 @@ class Coupon(models.Model):
        super(Coupon, self).save(*args, **kwargs)  # call the real save method
 
 
+class Delivery(models.Model):
+    user = models.ForeignKey(User, related_name='delivery',on_delete=models.CASCADE)
+    express = models.CharField(_('Express'),max_length=200, blank=True,null=True)
+    start_work = models.DateTimeField(_('Start Work'),null=True,blank=True)
+    end_work = models.DateTimeField(_('End Work'),null=True,blank=True)
+    address = models.ForeignKey('DeliveryAddress', related_name='delivery_address',on_delete=models.CASCADE)
+    phone = models.ForeignKey('DeliveryPhone', related_name='delivery_phoens',on_delete=models.CASCADE)
+
+    @property
+    def address_info(self):
+        return self.address.address if self.address else "No address provided"
+
+    @property
+    def phone_info(self):
+        return self.phone.phone if self.phone else "No phone number provided"
+
+    def __str__(self):
+        return f"{self.user} - {self.express if self.express else 'No express'} - {self.address_info}"
+
+
 ADDRESS_TYPE = [
     ('Home', 'Home'),
     ('Work', 'Work'),

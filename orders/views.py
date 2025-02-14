@@ -8,16 +8,19 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.conf import settings
+from django.views.generic.detail import DetailView
+
 
 
 import datetime
 import stripe
 
 
-from .models import Order , CartDetails , Cart , Coupon
+from .models import Order , CartDetails , Cart , Coupon , DeliveryPhone , DeliveryPhone , CreditCard
 from products.models import Product
 from settings.models import DeliveryFee
 from utils.generate_code import generate_code
+from userauths.models import Profile
 
 # Create your views here.
 
@@ -171,3 +174,25 @@ def coupon(request):
         'coupon': coupon,
     }
     return render(request,'orders/coupon.html',context)
+
+
+class Delivery(DetailView):
+    model = Profile
+    template_name = 'orders/checkout.html'
+    context_object_name = 'profile'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user=self.request.user)
+        
+    def get_object(self, queryset=None):
+        return get_object_or_404(Profile, user=self.request.user)
+    
+
+# return data off phoens and adsress and credit cards
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['phones'] = self.get_object().user.user_phone.all()
+        context['address'] = self.get_object().user.user_address.all()
+        context['credit'] = self.get_object().user.user_credit_cards.all() # user_credit_cards ----->the name off lien at db
+        return context
+
