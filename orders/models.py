@@ -114,7 +114,6 @@ class Delivery(models.Model):
 
 ADDRESS_TYPE = [
     ('Home', 'Home'),
-    ('Work', 'Work'),
     ('Bussinees','Bussinees'),
     ('Office','Office'),
     ('Academy','Academy'),

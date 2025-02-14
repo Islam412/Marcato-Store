@@ -76,8 +76,7 @@ post_save.connect(save_user_profile ,sender=User)
 
 ADDRESS_TYPE = [
     ('Home', 'Home'),
-    ('Work', 'Work'),
-    ('Bussinees','Bussinees'),
+    ('Business','Business'),
     ('Office','Office'),
     ('Academy','Academy'),
     ('Other','Other'),

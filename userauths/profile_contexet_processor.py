@@ -3,10 +3,10 @@ from .models import Profile, Phone
 def get_profile_data(request):
     profile_data = Profile.objects.filter(user=request.user).first()
     if profile_data:
-        # جلب كل الأرقام المرتبطة بالمستخدم
+        # Retrieve all phone numbers associated with the user
         phone_numbers = Phone.objects.filter(user=request.user)
         
-        # تصنيف الأرقام حسب النوع
+        # Categorize phone numbers by type
         primary_phone = phone_numbers.filter(type='Primary').first()
         secondary_phone = phone_numbers.filter(type='Secondary').first()
         third_phone = phone_numbers.filter(type='Third').first()
