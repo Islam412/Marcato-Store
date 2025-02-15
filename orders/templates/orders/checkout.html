@@ -265,7 +265,7 @@
                     <div class="col-lg-12">
                         <div class="account-card">
                             <div class="account-title">
-                                <h4>delivery address</h4>
+                                <h4>user address</h4>
                                 <button data-bs-toggle="modal" data-bs-target="#address-add">add address</button>
                             </div>
                             <div class="account-content">
@@ -276,7 +276,11 @@
                                                 <h6>{{ address.get_type_display }}</h6>
                                                 <p><strong>Address: </strong>{{ address.address }}</p>
                                                 <br>
-                                                <p><strong>Notes: </strong>{{ address.notes }}</p>
+                                                {% if address.notes %}
+                                                <p><strong>Notes:</strong> {{ address.notes }}</p>
+                                                {% else %}
+                                                    <em>No notes provided</em>
+                                                {% endif %}
                                                 <ul class="user-action">
                                                     <li>
                                                         <button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#address-edit-{{ address.id }}"></button>
@@ -288,11 +292,57 @@
                                             </div>
                                         </div>
                                     {% endfor %}
-                                    
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+                    <div class="col-lg-12">
+                        <div class="account-card">
+                            <div class="account-title">
+                                <h4>delivery address</h4>
+                                <button data-bs-toggle="modal" data-bs-target="#address-add">add address</button>
+                            </div>
+                            <div class="account-content">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card address active">
+                                            <h6>Home</h6>
+                                            <p>jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A</p>
+                                            <ul class="user-action">
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card address">
+                                            <h6>Office</h6>
+                                            <p>east tejturi bazar, dhaka-1200. word no-04, road no-13/c, house no-4/b</p>
+                                            <ul class="user-action">
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4 alert fade show">
+                                        <div class="profile-card address">
+                                            <h6>Bussiness</h6>
+                                            <p>kawran bazar, dhaka-1100. word no-02, road no-13/d, house no-7/m</p>
+                                            <ul class="user-action">
+                                                <li><button class="edit icofont-edit" title="Edit This" data-bs-toggle="modal" data-bs-target="#address-edit"></button></li>
+                                                <li><button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
                     <div class="col-lg-12">
                         <div class="account-card mb-0">
                             <div class="account-title">
@@ -301,48 +351,20 @@
                             </div>
                             <div class="account-content">
                                 <div class="row">
-                                    <div class="col-md-6 col-lg-4 alert fade show">
-                                        <div class="payment-card payment active">
-                                            <img src="{% static 'images/payment/png/01.png' %}" alt="payment">
-                                            <h4>card number</h4>
-                                            <p>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <sup>1876</sup>
-                                            </p>
-                                            <h5>miron mahmud</h5>
-                                            <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
-                                        </div>
-                                    </div>
+                                    {% for card in credit_cards %}
                                     <div class="col-md-6 col-lg-4 alert fade show">
                                         <div class="payment-card payment">
-                                            <img src="{% static 'images/payment/png/02.png' %}" alt="payment">
-                                            <h4>card number</h4>
+                                            <img src="{{ card.image.url }}" style="width: 58px; height: 14;" alt="payment" alt="payment">
+                                            <h4>Card Number</h4>
                                             <p>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <sup>1876</sup>
+                                                <span>{{ card.card_number }}</span>
+                                                <sup>{{ card.cvv }}</sup>
                                             </p>
-                                            <h5>miron mahmud</h5>
+                                            <h5>{{ card.name }}</h5>
                                             <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 col-lg-4 alert fade show">
-                                        <div class="payment-card payment">
-                                            <img src="{% static 'images/payment/png/03.png' %}" alt="payment">
-                                            <h4>card number</h4>
-                                            <p>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <span>****</span>
-                                                <sup>1876</sup>
-                                            </p>
-                                            <h5>miron mahmud</h5>
-                                            <button class="trash icofont-ui-delete" title="Remove This" data-bs-dismiss="alert"></button>
-                                        </div>
-                                    </div>
+                                    {% endfor %}
                                 </div>
                             </div>
                             <div class="checkout-check">
