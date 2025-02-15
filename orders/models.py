@@ -99,17 +99,17 @@ class Coupon(models.Model):
        super(Coupon, self).save(*args, **kwargs)  # call the real save method
 
 
-class Delivery(models.Model):
-    user = models.ForeignKey(User, related_name='delivery',on_delete=models.CASCADE)
-    express = models.CharField(_('Express'),max_length=200, blank=True,null=True)
-    start_work = models.DateTimeField(_('Start Work'),null=True,blank=True)
-    end_work = models.DateTimeField(_('End Work'),null=True,blank=True)
-    # address = models.ForeignKey('DeliveryAddress', related_name='delivery_address',on_delete=models.CASCADE)
-    # phone = models.ForeignKey('DeliveryPhone', related_name='delivery_phoens',on_delete=models.CASCADE)
+# class Delivery(models.Model):
+#     user = models.ForeignKey(User, related_name='delivery',on_delete=models.CASCADE)
+#     express = models.CharField(_('Express'),max_length=200, blank=True,null=True)
+#     start_work = models.DateTimeField(_('Start Work'),null=True,blank=True)
+#     end_work = models.DateTimeField(_('End Work'),null=True,blank=True)
+#     # address = models.ForeignKey('DeliveryAddress', related_name='delivery_address',on_delete=models.CASCADE)
+#     # phone = models.ForeignKey('DeliveryPhone', related_name='delivery_phoens',on_delete=models.CASCADE)
 
 
-    def __str__(self):
-        return f"{self.user}"
+#     def __str__(self):
+#         return f"{self.user}"
 
 
 ADDRESS_TYPE = [
@@ -128,31 +128,3 @@ class DeliveryAddress(models.Model):
 
     def __str__(self):
         return f"{self.type} - {self.address}"
-
-
-Phone_TYPE = [
-    ('Primary','Primary'),
-    ('Secondary','Secondary'),
-    ('Third','Third')
-]
-
-
-class DeliveryPhone(models.Model):
-    user = models.ForeignKey(User, related_name='delivery_phone', on_delete=models.CASCADE)
-    type = models.CharField(_('Type'),max_length=20, choices=Phone_TYPE)
-    phone = models.CharField(_('Notes'),max_length=30)
-
-    def __str__(self):
-        return f"{self.type} - {self.phone}"
-
-class CreditCard(models.Model):
-    user = models.ForeignKey(User, related_name='credit_cards', on_delete=models.CASCADE)
-    image = models.ImageField(_('Image'), upload_to='Images_credit', null=True, blank=True, default='credit.webp')
-    name = models.CharField(_('Name'),max_length=225)
-    card_number = models.CharField(_('Card Number'),max_length=16)
-    country = models.CharField(_('Country'),max_length=225)
-    cvv = models.CharField(_('CVV'),max_length=3)
-    expiration_date = models.DateField(_('Expiration Date'),)
-
-    def __str__(self):
-        return f"Card ending in {self.card_number[-4:]} - {self.user.username}"

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Cart,CartDetails,Order,OrderDetails,Coupon,DeliveryAddress,DeliveryPhone,CreditCard ,Delivery
+from .models import Cart,CartDetails,Order,OrderDetails,Coupon,DeliveryAddress
 
 # Register your models here.
 
@@ -13,6 +13,3 @@ admin.site.register(Order)
 admin.site.register(OrderDetails)
 admin.site.register(Coupon)
 admin.site.register(DeliveryAddress)
-admin.site.register(DeliveryPhone)
-admin.site.register(CreditCard)
-admin.site.register(Delivery)

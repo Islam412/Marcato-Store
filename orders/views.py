@@ -16,7 +16,7 @@ import datetime
 import stripe
 
 
-from .models import Order , CartDetails , Cart , Coupon , DeliveryPhone , DeliveryAddress , CreditCard 
+from .models import Order , CartDetails , Cart , Coupon , DeliveryAddress
 from products.models import Product
 from settings.models import DeliveryFee
 from utils.generate_code import generate_code
