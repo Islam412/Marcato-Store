@@ -31,7 +31,12 @@ class Cart(models.Model):
         for item in self.cart_details.all():
             total += item.total
         return round(total,2)
-    
+
+    def discount_amount(self):
+        if self.total_after_coupon:
+            return round(self.cart_total() - self.total_after_coupon, 2)
+        return 0.0
+        
 
 
 class CartDetails(models.Model):
@@ -99,17 +104,7 @@ class Coupon(models.Model):
        super(Coupon, self).save(*args, **kwargs)  # call the real save method
 
 
-# class Delivery(models.Model):
-#     user = models.ForeignKey(User, related_name='delivery',on_delete=models.CASCADE)
-#     express = models.CharField(_('Express'),max_length=200, blank=True,null=True)
-#     start_work = models.DateTimeField(_('Start Work'),null=True,blank=True)
-#     end_work = models.DateTimeField(_('End Work'),null=True,blank=True)
-#     # address = models.ForeignKey('DeliveryAddress', related_name='delivery_address',on_delete=models.CASCADE)
-#     # phone = models.ForeignKey('DeliveryPhone', related_name='delivery_phoens',on_delete=models.CASCADE)
 
-
-#     def __str__(self):
-#         return f"{self.user}"
 
 
 

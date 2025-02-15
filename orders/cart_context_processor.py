@@ -1,4 +1,4 @@
-from .models import Cart, CartDetails , DeliveryAddress
+from .models import Cart, CartDetails
 
 def get_or_create_cart(request):
     if request.user.is_authenticated:
