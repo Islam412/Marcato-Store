@@ -178,13 +178,12 @@ def coupon(request):
 
 
 
-# def delivery_view(request):
-#     user = request.user
-#     phones = DeliveryPhone.objects.filter(user=user)
 
-#     context = {
-#         'phones': phones,
-#     }
-#     return render(request, 'orders/checkout.html', context)
+def address_list_view(request):
+    addresses = DeliveryAddress.objects.filter(user=request.user)
+    return render(request, 'orders/checkout.html', {'addresses': addresses})
+
+
+
 
 

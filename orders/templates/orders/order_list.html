@@ -108,7 +108,15 @@
                                         <div class="col-lg-3">
                                             <div class="orderlist-deliver">
                                                 <h6>Delivery location</h6>
-                                                <p>jalkuri, fatullah, narayanganj-1420. word no-09, road no-17/A</p>
+                                                {% for address in addresses %}
+                                                    <p>{{ address.address }}</p>
+                                                    <br>
+                                                    {% if address.notes %}
+                                                    <em><strong>Notes:</strong> {{ address.notes }}</em>
+                                                    {% comment %} {% else %}
+                                                        <em>No notes provided</em>{% endcomment %}
+                                                    {% endif %} 
+                                                {% endfor %}
                                             </div>
                                         </div>
                                         <div class="col-lg-12">

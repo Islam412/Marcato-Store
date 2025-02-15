@@ -1,4 +1,4 @@
-from .models import Cart, CartDetails
+from .models import Cart, CartDetails , DeliveryAddress
 
 def get_or_create_cart(request):
     if request.user.is_authenticated:
@@ -9,3 +9,13 @@ def get_or_create_cart(request):
         return {'cart_data': cart}
     else:
         return {}
+
+
+
+
+# def get_delivery_address_data(request):
+#     if request.user.is_authenticated:
+#         delivery_address_data = DeliveryAddress.objects.filter(user=request.user)
+#         return {'delivery_address_list': delivery_address_data}  # Changed key to "delivery_address_list"
+#     return {'delivery_address_list': None}
+
